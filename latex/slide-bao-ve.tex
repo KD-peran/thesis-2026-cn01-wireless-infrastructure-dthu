@@ -1,0 +1,296 @@
+% Slide bảo vệ khóa luận tốt nghiệp.
+% Đề tài: Thiết kế kiến trúc tổng thể hạ tầng mạng không dây tại Trường Đại học Đồng Tháp
+% Sinh viên: Nguyễn Thị Kỳ Duyên (MSSV: 0023410647 - Lớp: ĐHCNTT23B-CS)
+% GVHD: TS. Lương Thái Ngọc
+% Build:  .\build.ps1 slide-bao-ve.tex (chạy từ thư mục gốc)
+
+\documentclass[fleqn]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}
+\usepackage{mathtools,amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows.meta,positioning}
+\usepackage[backend=biber,style=numeric]{biblatex}
+\addbibresource{../bao-cao/tai-lieu-tham-khao.bib}
+
+\hypersetup{unicode}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\graphicspath{{images/}}
+
+\AtBeginSection[]{\begin{frame}\frametitle{Nội dung}\tableofcontents[currentsection]\end{frame}}
+
+\title[Thiết kế Kiến trúc Mạng Không Dây DTHU]{THIẾT KẾ KIẾN TRÚC TỔNG THỂ HẠ TẦNG MẠNG KHÔNG DÂY TẠI TRƯỜNG ĐẠI HỌC ĐỒNG THÁP}
+\author[Nguyễn Thị Kỳ Duyên]{Sinh viên: Nguyễn Thị Kỳ Duyên \\ \small MSSV: 0023410647 -- Lớp: ĐHCNTT23B-CS}
+\institute[DTHU]{Khoa Công nghệ và Kỹ thuật, Trường Đại học Đồng Tháp\\ Ngành: Khoa học máy tính -- Chuyên ngành: Mạng Máy Tính và An Ninh\\ \textbf{GVHD: TS. Lương Thái Ngọc}}
+\date{Tháng 04/2027}
+
+\begin{document}
+
+\begin{frame}\titlepage\end{frame}
+
+\begin{frame}{Nội dung trình bày}
+  \tableofcontents
+\end{frame}
+
+\section{Đặt vấn đề \& Mục tiêu đề tài}
+
+\begin{frame}{Thực trạng hạ tầng Wi-Fi tại Trường Đại học Đồng Tháp}
+  \begin{itemize}
+    \item \textbf{Bối cảnh chuyển đổi số giáo dục đại học:}
+      \begin{itemize}
+        \item Quy mô hơn 15.000 sinh viên, cán bộ và giảng viên.
+        \item Mỗi cá nhân sử dụng từ 1 đến 2 thiết bị di động (BYOD: laptop, smartphone, tablet).
+        \item Nhu cầu truy cập tài liệu số, hệ thống E-learning, thi trực tuyến tăng vọt.
+      \end{itemize}
+    \item \textbf{Hạn chế của hạ tầng hiện hữu:}
+      \begin{itemize}
+        \item Phát triển tự phát theo nhu cầu cục bộ, thiếu quy hoạch tổng thể đồng bộ.
+        \item Giờ cao điểm xảy ra hiện tượng sóng báo ``đầy vạch'' nhưng không thể truy cập Internet.
+        \item Can nhiễu phổ vô tuyến nghiêm trọng giữa các Access Point chuẩn cũ (802.11n/ac).
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Mục tiêu và phạm vi nghiên cứu}
+  \begin{columns}
+    \begin{column}{0.52\textwidth}
+      \textbf{Mục tiêu nghiên cứu:}
+      \begin{itemize}\small
+        \item Khảo sát, đo kiểm định lượng hiện trạng sóng Wi-Fi toàn campus DTHU.
+        \item Chẩn đoán chính xác 3 điểm nghẽn cổ chai của hệ thống.
+        \item Thiết kế kiến trúc mạng không dây chuẩn hóa (Wi-Fi 6 + WLC tập trung).
+        \item Mô phỏng kiểm chứng trên \textbf{Cisco Packet Tracer} và đề xuất lộ trình tối ưu.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Phạm vi đề tài:}
+      \begin{itemize}\small
+        \item \textbf{Khu vực khảo sát:} Giảng đường A1, Hành chính B3, Căn tin B5, Thư viện, KTX B6, các tòa H1, H2, H3, C1, C2...
+        \item \textbf{Công cụ đo kiểm:} Wi-Fi Analyzer, Speedtest, Wireshark.
+        \item \textbf{Mô phỏng:} Cisco Packet Tracer 8.x.
+        \item \textbf{Giới hạn:} Đánh giá giải pháp trên mô hình mô phỏng kỹ thuật, không can thiệp phần cứng thực tế.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{Cơ sở lý thuyết mạng không dây}
+
+\begin{frame}{Hệ thống chuẩn IEEE 802.11 và Công nghệ Wi-Fi 6}
+  \begin{itemize}\small
+    \item \textbf{Sự tiến hóa chuẩn IEEE 802.11:}
+      \begin{itemize}\footnotesize
+        \item 802.11b/g (2.4 GHz, 11/54 Mbps) $\rightarrow$ 802.11n (Wi-Fi 4, 600 Mbps) $\rightarrow$ 802.11ac (Wi-Fi 5, 5 GHz, 1.73 Gbps) $\rightarrow$ \textbf{802.11ax (Wi-Fi 6, 9.6 Gbps)}.
+      \end{itemize}
+    \item \textbf{Ba đột phá cốt lõi của Wi-Fi 6 cho môi trường mật độ cao (High Density):}
+      \begin{itemize}\footnotesize
+        \item \textbf{OFDMA (Orthogonal Frequency Division Multiple Access):} Chia nhỏ kênh thành các Resource Units (RU), phục vụ đồng thời nhiều thiết bị, triệt tiêu độ trễ hàng đợi.
+        \item \textbf{MU-MIMO 8x8 (Uplink/Downlink):} Tăng gấp đôi luồng dữ liệu đồng thời so với Wi-Fi 5.
+        \item \textbf{BSS Coloring (Tô màu khung tin):} Phân biệt sóng lân cận cùng tần số, giảm thiểu va chạm kênh truyền (Clear Channel Assessment - CCA).
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Mô hình quản lý tập trung WLC và Fast Roaming}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \textbf{Kiến trúc WLC (Split-MAC):}
+      \begin{itemize}\small
+        \item Phân tách chức năng giữa AP hạng nhẹ (Lightweight AP) và WLC thông qua giao thức \textbf{CAPWAP}.
+        \item WLC đảm nhận: Quản lý sóng tự động (RRM), xác thực tập trung, cấu hình đồng bộ, QoS.
+        \item Khắc phục hoàn toàn tình trạng AP độc lập cấu hình rời rạc.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \textbf{Chuyển vùng nhanh (Fast Roaming):}
+      \begin{itemize}\small
+        \item \textbf{IEEE 802.11r (Fast Transition):} Giảm thời gian bắt tay mã hóa chuyển vùng xuống $< 50\text{ms}$.
+        \item \textbf{IEEE 802.11k/v:} Hỗ trợ báo cáo lân cận và điều hướng sóng (BSS Transition), triệt tiêu lỗi thiết bị bám dính AP ở xa (\textit{Sticky Client}).
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{Khảo sát \& Đánh giá hiện trạng DTHU}
+
+\begin{frame}{Khảo sát thực địa hạ tầng thiết bị hiện hữu}
+  \begin{itemize}
+    \item \textbf{Bộ điều khiển trung tâm (Wireless Switch):} Motorola RFS6000.
+      \begin{itemize}\small
+        \item Năng lực tối đa: Chỉ cấp phép cho tối đa \textbf{2.000 kết nối đồng thời}.
+        \item Giờ cao điểm (09h30--10h30, 14h00--15h30): Lưu lượng thực tế đạt \textbf{2.150 -- 2.300 thiết bị} $\rightarrow$ Tràn bảng cấp phát DHCP, từ chối kết nối mới.
+      \end{itemize}
+    \item \textbf{Mạng lưới Access Point tại các khối nhà:}
+      \begin{itemize}\small
+        \item Các khối giảng đường lớn (Tòa A1, Tòa C2): Mật độ thiết bị dày đặc nhưng lắp đặt AP chuẩn cũ.
+        \item Tòa hành chính (B1, B2, B3): Tường bê tông dày, suy hao tín hiệu cao.
+        \item Không gian mở (Căn tin B5): Tín hiệu lan tỏa rộng nhưng giao thoa nhiễu mạnh.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Số liệu đo kiểm thực tế (Wi-Fi Analyzer \& Speedtest)}
+  \begin{table}\small\centering
+  \begin{tabular}{lcccc}
+    \toprule
+    \textbf{Khu vực} & \textbf{Khung giờ} & \textbf{Download} & \textbf{Upload} & \textbf{Độ trễ Ping} \\
+    \midrule
+    Tòa A1 (Giảng đường) & 6h00 (vắng) & 20.08 Mbps & 18.02 Mbps & 23.45 ms \\
+                         & 9h00 (cao điểm) & \textbf{5.19 Mbps} & \textbf{6.98 Mbps} & \textbf{110.0 ms} \\
+    \midrule
+    Tòa B3 (Hành chính)  & 7h00 (vắng) & 23.89 Mbps & 20.18 Mbps & 28.90 ms \\
+                         & 10h00 (cao điểm)& 15.35 Mbps & 16.45 Mbps & 130.0 ms \\
+    \midrule
+    Tòa B5 (Căn tin mở)  & 7h20 (vắng) & 19.80 Mbps & 18.89 Mbps & 20.05 ms \\
+                         & 11h30 (cao điểm)& 9.09 Mbps & 10.29 Mbps & 100.0 ms \\
+    \bottomrule
+  \end{tabular}
+  \end{table}
+  \vspace{0.15cm}
+  $\Rightarrow$ Tốc độ tải xuống tại Giảng đường A1 giờ cao điểm sụt giảm \textbf{gần 74\%}, Ping vượt ngưỡng 100ms.
+\end{frame}
+
+\begin{frame}{Ba điểm nghẽn kỹ thuật cốt lõi}
+  \begin{enumerate}
+    \item \textbf{Quá tải phần cứng WLC:} Thiết bị RFS6000 chạm trần 2.000 thiết bị, CPU nghẽn và kiệt tài nguyên cấp phát DHCP.
+    \item \textbf{Can nhiễu đồng kênh (Co-channel Interference):}
+      \begin{itemize}\small
+        \item Băng tần 2.4 GHz bị lạm dụng, cấu hình kênh chồng lấn thay vì cố định (1, 6, 11).
+        \item Tranh chấp thời gian phát sóng (\textit{Airtime Contention}) làm giảm nghiêm trọng hiệu năng truyền tải.
+      \end{itemize}
+    \item \textbf{Thiết bị phát sóng ngoại lai (Rogue AP):}
+      \begin{itemize}\small
+        \item Xuất hiện nhiều router Wi-Fi cá nhân cắm sai quy định (ví dụ SSID: TP-LINK\_E9A6).
+        \item Cấp phát DHCP giả mạo làm mất mạng diện rộng và tiềm ẩn nguy cơ bảo mật.
+      \end{itemize}
+  \end{enumerate}
+\end{frame}
+
+\section{Thiết kế kiến trúc tổng thể \& Giải pháp}
+
+\begin{frame}{Mô hình thiết kế kiến trúc phân cấp 3 lớp}
+  \begin{itemize}\small
+    \item \textbf{Lớp Lõi (Core Layer):} Cặp Switch Core hiệu năng cao hoạt động chế độ dự phòng chủ động, băng thông chuyển mạch tốc độ cao 10/40 Gbps.
+    \item \textbf{Lớp Phân phối (Distribution Layer):} Định tuyến đa WAN, cân bằng tải động cho khối Sinh viên và chính sách định tuyến tĩnh PBR ưu tiên cho khối Giảng viên/Hành chính.
+    \item \textbf{Lớp Truy cập (Access Layer):} Hệ thống Switch Access chuẩn \textbf{PoE+ (802.3at)} cấp nguồn và truyền dẫn GigE tới các AP.
+    \item \textbf{Hạ tầng Điều khiển trung tâm:} Nâng cấp WLC năng lực quản trị \textbf{5.000 -- 10.000 kết nối đồng thời}, hỗ trợ cơ chế dự phòng $N+1$ High Availability.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Quy hoạch VLAN, Dải IP và Chiến lược DHCP}
+  \begin{table}\small\centering
+  \begin{tabular}{cllll}
+    \toprule
+    \textbf{VLAN} & \textbf{Đối tượng} & \textbf{Dải mạng IP (Subnet)} & \textbf{SSID} & \textbf{Lease Time} \\
+    \midrule
+    10 & Cán bộ / GV & 192.168.10.0/24 (254 IP) & DTHU-STAFF & 24 giờ \\
+    20 & Sinh viên Tòa A & 10.10.0.0/20 (4.094 IP) & DTHU-STUDENT & 2 -- 4 giờ \\
+    30 & Sinh viên Tòa B,C & 10.20.0.0/20 (4.094 IP) & DTHU-STUDENT & 2 -- 4 giờ \\
+    40 & Khách vãng lai & 172.16.40.0/24 (254 IP) & DTHU-GUEST & 1 giờ \\
+    \bottomrule
+  \end{tabular}
+  \end{table}
+  \vspace{0.2cm}
+  \begin{itemize}\small
+    \item \textbf{Đột phá giải quyết cạn kiệt IP:} Áp dụng subnet /20 cung cấp hơn 8.000 IP cho sinh viên kết hợp giảm Lease Time xuống 2--4h để thu hồi IP nhanh chóng.
+    \item \textbf{Bảo mật:} Cách ly máy trạm lớp 2 (Layer 2 Client Isolation), ngăn chặn quét mạng nội bộ và lây lan mã độc.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Giải pháp Tối ưu Vô tuyến và An ninh mạng}
+  \begin{itemize}
+    \item \textbf{Quy hoạch AP chuẩn Wi-Fi 6 tại điểm nóng:}
+      \begin{itemize}\small
+        \item Trang bị AP Wi-Fi 6 (OFDMA, MU-MIMO) tại Giảng đường A1, Thư viện, Căn tin B5.
+        \item Tái sử dụng các AP Wi-Fi 4/5 còn tốt cho các phòng làm việc nhỏ ít người.
+      \end{itemize}
+    \item \textbf{Quản lý tài nguyên vô tuyến thông minh (RRM):}
+      \begin{itemize}\small
+        \item Tự động gán kênh sạch (DCA) và tự cân chỉnh công suất phát sóng (TPC).
+      \end{itemize}
+    \item \textbf{Xác thực tập trung cấp Doanh nghiệp (Enterprise Security):}
+      \begin{itemize}\small
+        \item Chuyển đổi từ mật khẩu chia sẻ (WPA2-PSK) sang xác thực định danh cá nhân \textbf{WPA2/WPA3-Enterprise (802.1X/EAP)} tích hợp máy chủ RADIUS/LDAP.
+        \item Hệ thống tự động dò quét và vô hiệu hóa thiết bị ngoại lai Rogue AP (WIDS/WIPS).
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Kết quả mô phỏng \& Đánh giá}
+
+\begin{frame}{Mô hình mô phỏng trên Cisco Packet Tracer}
+  \begin{itemize}
+    \item \textbf{Xây dựng kiến trúc hoàn chỉnh:}
+      \begin{itemize}\small
+        \item Tích hợp Router Biên $\rightarrow$ Core Switch $\rightarrow$ Distribution Switches $\rightarrow$ PoE Access Switches.
+        \item WLC kết nối máy chủ dịch vụ RADIUS Server, DHCP Server, DNS và Web Server.
+        \item Cấu hình AP phát đồng thời đa SSID với các chính sách VLAN độc lập.
+      \end{itemize}
+    \item \textbf{Kiểm thử các kịch bản thực tế:}
+      \begin{itemize}\small
+        \item Kịch bản cấp phát đồng thời lượng lớn IP qua relay agent.
+        \item Kịch bản cô lập Client-to-Client trong mạng sinh viên.
+        \item Kịch bản chuyển vùng mượt mà giữa các AP khi di chuyển.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{So sánh định lượng trước và sau tối ưu}
+  \begin{table}\small\centering
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{Chỉ số kỹ thuật} & \textbf{Hiện trạng khảo sát} & \textbf{Kỳ vọng sau tối ưu} \\
+    \midrule
+    Năng lực chịu tải đồng thời & $\sim 2.000$ thiết bị (Gây nghẽn) & \textbf{$> 10.000$ thiết bị} \\
+    Nhiễu đồng kênh Tòa A1 & Rất cao (Lỗi quy hoạch) & \textbf{Thấp} (Thuật toán DCA/RRM) \\
+    Độ trễ Ping giờ cao điểm & $> 100$ ms & \textbf{$< 30$ ms} (Wi-Fi 6 OFDMA) \\
+    Bảo mật xác thực & PSK dùng chung (Rủi ro cao) & \textbf{802.1X} (Định danh cá nhân) \\
+    Thời gian chuyển vùng & Kém (Thường bị ngắt kết nối) & \textbf{$< 50$ ms} (IEEE 802.11r/k/v) \\
+    Tỷ lệ mất gói tin & 7\% -- 12\% & \textbf{$< 2\%$} \\
+    \bottomrule
+  \end{tabular}
+  \end{table}
+\end{frame}
+
+\section{Kết luận \& Hướng phát triển}
+
+\begin{frame}{Kết luận và Đóng góp của đề tài}
+  \begin{itemize}
+    \item \textbf{Kết quả đạt được:}
+      \begin{itemize}\small
+        \item Hoàn thành 100\% các mục tiêu trong Đề cương nghiên cứu đã được phê duyệt.
+        \item Cung cấp bộ dữ liệu khảo sát thực địa toàn diện và bóc tách chính xác nguyên nhân nghẽn Wi-Fi tại DTHU.
+        \item Xây dựng thành công bản vẽ kiến trúc mạng không dây tổng thể đáp ứng tăng trưởng 5 năm tới.
+      \end{itemize}
+    \item \textbf{Ý nghĩa thực tiễn:}
+      \begin{itemize}\small
+        \item Làm tài liệu kỹ thuật tham khảo giá trị cho Trung tâm CNTT - Trường Đại học Đồng Tháp.
+        \item Phương án có tính khả thi cao, tiết kiệm ngân sách nhờ tái sử dụng thiết bị cũ và tận dụng máy chủ LDAP sẵn có.
+      \end{itemize}
+    \item \textbf{Hướng phát triển tương lai:}
+      \begin{itemize}\small
+        \item Triển khai thí điểm (PoC) tại Giảng đường A1 để đo kiểm thực nghiệm.
+        \item Tích hợp AI/ML trong vận hành mạng tự động (AIOps).
+        \item Nghiên cứu chuẩn bị hạ tầng đón đầu tiêu chuẩn Wi-Fi 7 (802.11be).
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Tài liệu tham khảo chính}
+  \nocite{*}
+  \printbibliography
+\end{frame}
+
+\begin{frame}
+  \centering
+  \Large\bfseries
+  Xin chân thành cảm ơn quý Thầy, Cô\\ trong Hội đồng đã chú ý lắng nghe!\\[1cm]
+  \normalsize Kính mong nhận được ý kiến đóng góp quý báu của quý Thầy, Cô.
+\end{frame}
+
+\end{document}

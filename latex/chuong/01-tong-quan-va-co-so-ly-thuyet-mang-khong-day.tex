@@ -1,0 +1,219 @@
+\chapter{Tổng quan và cơ sở lý thuyết mạng không dây}
+\label{chap:ly-thuyet}
+
+\section{Tổng quan về mạng cục bộ không dây (WLAN)}
+
+\subsection{Khái niệm và đặc điểm của WLAN}
+
+Mạng cục bộ không dây (Wireless Local Area Network -- WLAN) là hệ thống mạng máy tính cho phép hai hay nhiều thiết bị kết nối và truyền thông tin với nhau thông qua môi trường sóng vô tuyến (Radio Frequency -- RF) thay vì sử dụng cáp truyền dẫn vật lý truyền thống \cite{kurose2021computer}. Chuẩn hóa quốc tế của mạng WLAN được quản lý bởi Viện Kỹ sư Điện và Điện tử (IEEE) thông qua bộ tiêu chuẩn IEEE 802.11, thường được biết đến trên thị trường với thương hiệu Wi-Fi.
+
+So với mạng có dây truyền thống (Ethernet IEEE 802.3), mạng WLAN sở hữu các đặc tính kỹ thuật nổi bật:
+\begin{itemize}
+    \item \textbf{Tính di động và linh hoạt cao:} Người dùng có thể tự do di chuyển trong phạm vi vùng phủ sóng của các điểm truy cập (Access Point -- AP) mà không bị ngắt quãng liên lạc logic.
+    \item \textbf{Khả năng triển khai thuận tiện:} Giảm thiểu đáng kể thời gian và chi phí kéo cáp mạng qua các cấu trúc xây dựng phức tạp như tường dày, trần bê tông hay các khu vực mở ngoài trời.
+    \item \textbf{Khả năng mở rộng dễ dàng:} Việc mở rộng vùng phủ sóng hoặc bổ sung thiết bị đầu cuối vào hệ thống được thực hiện nhanh chóng thông qua việc tích hợp thêm các trạm phát sóng mới.
+    \item \textbf{Thách thức về môi trường chia sẻ:} Do dữ liệu truyền lan trong không gian tự do, băng thông mạng là tài nguyên dùng chung. Hiệu năng truyền tải chịu tác động lớn của hiện tượng suy hao đường truyền (Path Loss), phản xạ đa đường (Multipath Fading) và can nhiễu sóng vô tuyến \cite{pahlavan2020principles}.
+\end{itemize}
+
+\subsection{Phân loại mạng không dây theo phạm vi phủ sóng}
+
+Trong hệ thống viễn thông và mạng máy tính, mạng không dây được phân cấp theo bán kính hoạt động vật lý thành 4 nhóm chính:
+\begin{enumerate}
+    \item \textbf{WPAN (Wireless Personal Area Network):} Mạng cá nhân không dây có bán kính bao phủ dưới 10m, điển hình là các chuẩn Bluetooth (IEEE 802.15.1) và ZigBee (IEEE 802.15.4), phục vụ kết nối thiết bị ngoại vi và cảm biến tầm gần.
+    \item \textbf{WLAN (Wireless Local Area Network):} Mạng cục bộ không dây có phạm vi phủ sóng từ vài chục mét đến hàng trăm mét, hoạt động chủ yếu dựa trên bộ tiêu chuẩn IEEE 802.11, thích hợp cho khuôn viên trường học, doanh nghiệp và tòa nhà.
+    \item \textbf{WMAN (Wireless Metropolitan Area Network):} Mạng đô thị không dây với phạm vi bao phủ toàn thành phố (chuẩn WiMAX -- IEEE 802.16).
+    \item \textbf{WWAN (Wireless Wide Area Network):} Mạng diện rộng không dây sử dụng công nghệ mạng di động tế bào viễn thông như 4G LTE, 5G và vệ tinh viễn thông.
+\end{enumerate}
+
+Trong mô hình kiến trúc khuôn viên đại học (Campus Network), WLAN giữ vai trò nòng cốt ở lớp truy cập (Access Layer), trực tiếp tiếp nhận và xử lý lưu lượng truyền thông từ hàng ngàn thiết bị cá nhân của giảng viên và sinh viên.
+
+\section{Các mô hình kiến trúc hoạt động của IEEE 802.11}
+
+Theo quy chuẩn IEEE 802.11, kiến trúc mạng không dây được tổ chức xoay quanh đơn vị cơ bản là \textbf{Service Set} (Tập dịch vụ) \cite{gast2005wireless}. Dựa trên cách thức liên kết giữa các máy trạm (Station -- STA) và trạm phát sóng (Access Point -- AP), mạng WLAN được chia làm 3 mô hình hoạt động chính:
+
+\subsection{Mô hình mạng cơ sở (Basic Service Set -- BSS)}
+
+Mô hình BSS bao gồm một điểm truy cập Access Point (AP) cố định và các trạm máy tính hoặc thiết bị di động (STA) kết nối trực tiếp đến AP đó (Hình \ref{fig:bss}). Trong mô hình này, AP đóng vai trò là thiết bị trung tâm điều phối toàn bộ phiên truyền thông: mọi gói tin gửi từ STA này đến STA khác trong cùng BSS đều bắt buộc phải chuyển tiếp qua AP.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\textwidth]{BSS.jpg}
+    \caption{Mô hình mạng cơ sở Basic Service Set (BSS)}
+    \label{fig:bss}
+\end{figure}
+
+Đặc điểm của mô hình BSS:
+\begin{itemize}
+    \item Mỗi BSS được định danh bằng một mã định danh dịch vụ cơ bản BSSID (chính là địa chỉ MAC của card sóng vô tuyến trên AP).
+    \item Toàn bộ các STA trong BSS chia sẻ chung một kênh tần số hoạt động của AP.
+    \item Phạm vi phục vụ của BSS bị giới hạn bởi vùng phủ sóng vô tuyến (Basic Service Area -- BSA) của AP đơn lẻ.
+\end{itemize}
+
+\subsection{Mô hình mạng mở rộng (Extended Service Set -- ESS)}
+
+Để đáp ứng nhu cầu phủ sóng trên diện tích lớn như toàn bộ khuôn viên trường đại học gồm nhiều khối nhà, chuẩn IEEE 802.11 định nghĩa mô hình Extended Service Set (ESS). Mô hình này kết hợp nhiều BSS lại với nhau thông qua một hệ thống phân phối chung (Distribution System -- DS), thường là mạng chuyển mạch có dây Ethernet tốc độ cao (Hình \ref{fig:ess}).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ESS.jpg}
+    \caption{Mô hình mạng mở rộng Extended Service Set (ESS)}
+    \label{fig:ess}
+\end{figure}
+
+Đặc điểm nổi bật của ESS:
+\begin{itemize}
+    \item Tất cả các AP trong cùng một mạng ESS được cấu hình phát chung một tên mạng logic gọi là SSID (Service Set Identifier), cho phép người dùng nhìn thấy một hệ thống Wi-Fi đồng nhất duy nhất.
+    \item Các AP đặt cạnh nhau được cấu hình trên các kênh tần số không chồng lấn để triệt tiêu nhiễu đồng kênh.
+    \item Hỗ trợ cơ chế chuyển vùng (Roaming): Khi sinh viên cầm laptop hoặc điện thoại di chuyển từ tòa nhà này sang tòa nhà khác, thiết bị sẽ tự động ngắt kết nối với AP có tín hiệu yếu và liên kết sang AP có tín hiệu mạnh hơn mà vẫn duy trì liên tục phiên làm việc trên tầng ứng dụng.
+\end{itemize}
+
+\subsection{Mô hình mạng độc lập Ad-hoc (Independent BSS -- IBSS)}
+
+Mô hình IBSS (còn gọi là mạng ngang hàng Ad-hoc) là mô hình không sử dụng Access Point trung tâm (Hình \ref{fig:ibss}). Các thiết bị di động trong cự ly gần tự động bắt tay và truyền nhận dữ liệu trực tiếp với nhau theo cơ chế Peer-to-Peer.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\textwidth]{IBSS.jpg}
+    \caption{Mô hình mạng Ad-hoc (Independent BSS -- IBSS)}
+    \label{fig:ibss}
+\end{figure}
+
+Mặc dù thiết lập nhanh và không tốn chi phí hạ tầng, mô hình IBSS không hỗ trợ quản trị tập trung, độ tin cậy thấp, khó triển khai bảo mật chặt chẽ và suy giảm hiệu năng nghiêm trọng khi số lượng máy trạm tăng. Do đó, mô hình này không được sử dụng trong các hệ thống mạng quy mô trường học hoặc doanh nghiệp.
+
+\section{Cơ chế truy nhập kênh và kiểm soát xung đột trong WLAN}
+
+\subsection{Cơ chế CSMA/CA}
+
+Khác với mạng có dây Ethernet sử dụng cơ chế phát hiện va chạm CSMA/CD (Carrier Sense Multiple Access with Collision Detection), mạng không dây IEEE 802.11 bắt buộc phải sử dụng cơ chế tránh va chạm \textbf{CSMA/CA} (Carrier Sense Multiple Access with Collision Avoidance) \cite{kurose2021computer}. Nguyên nhân là do trong môi trường sóng vô tuyến, công suất phát tín hiệu tại anten của trạm phát lớn hơn hàng nghìn lần so với cường độ tín hiệu thu được từ các trạm khác, khiến máy phát không thể vừa phát sóng vừa lắng nghe để phát hiện va chạm trên đường truyền.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{CSMA-CA.png}
+    \caption{Quy trình truyền dẫn dữ liệu sử dụng CSMA/CA và cơ chế bắt tay RTS/CTS}
+    \label{fig:csma-ca}
+\end{figure}
+
+Quy trình hoạt động của thuật toán CSMA/CA (Hình \ref{fig:csma-ca}):
+\begin{enumerate}
+    \item \textbf{Cảm nhận sóng mang (Carrier Sense):} Trước khi gửi dữ liệu, thiết bị lắng nghe kênh truyền thông qua cảm nhận vật lý (Clear Channel Assessment -- CCA) và cảm nhận ảo dựa trên véc-tơ phân bổ mạng (Network Allocation Vector -- NAV).
+    \item \textbf{Khoảng giãn cách khung (IFS) và Backoff:} Nếu kênh truyền rỗi trong khoảng thời gian phân tán DIFS (Distributed Inter-Frame Space), trạm sẽ tạo một giá trị thời gian chờ ngẫu nhiên gọi là khoảng lùi (Random Backoff). Thiết bị giảm dần giá trị bộ đếm lùi khi kênh rỗi; trạm nào giảm về 0 trước sẽ được quyền chiếm dụng kênh để phát tin.
+    \item \textbf{Xác nhận truyền tin (ACK):} Sau khi nhận trọn vẹn khung dữ liệu Data Frame đúng mã kiểm tra CRC, bên nhận phải gửi lại một khung tin xác nhận ACK (Acknowledge) sau khoảng thời gian SIFS ngắn nhất. Nếu không nhận được ACK trong thời gian quy định, bên phát mặc định đã xảy ra va chạm và nhân đôi cửa sổ lùi (Binary Exponential Backoff) trước khi thử truyền lại.
+\end{enumerate}
+
+Bảng \ref{tab:csma_compare} tổng hợp các điểm khác biệt bản chất giữa hai cơ chế truy nhập kênh có dây và không dây:
+
+\begin{table}[htbp]
+\centering
+\caption{So sánh cơ chế CSMA/CA (WLAN) và CSMA/CD (Ethernet)}
+\label{tab:csma_compare}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Tiêu chí kỹ thuật} & \textbf{CSMA/CA (IEEE 802.11)} & \textbf{CSMA/CD (IEEE 802.3)} \\
+\midrule
+Môi trường truyền dẫn & Sóng vô tuyến không dây (Bán song công) & Cáp xoắn đôi / cáp quang có dây \\
+Phương thức xử lý xung đột & Phòng ngừa và né tránh trước khi gửi & Phát hiện khi đang truyền và gửi tín hiệu Jamming \\
+Khung tin xác nhận ACK & Bắt buộc ở lớp MAC & Không bắt buộc (xử lý ở tầng giao vận TCP) \\
+Hiện tượng nút ẩn/nút lộ & Thường xuyên xảy ra & Không tồn tại \\
+Hiệu suất kênh hữu ích & Thường đạt 50\% -- 60\% băng thông lý thuyết & Đạt $>90\%$ băng thông cáp \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Hiện tượng nút ẩn và cơ chế bắt tay RTS/CTS}
+
+Trong mạng không dây, hiện tượng \textbf{Nút ẩn (Hidden Node)} xảy ra khi hai máy trạm $STA_1$ và $STA_2$ cùng nằm trong tầm phủ sóng của một Access Point nhưng ở cách xa nhau ngoài tầm nghe thấy nhau. Khi cả hai trạm cùng cảm nhận kênh rỗi và đồng thời phát gói tin về phía AP, các luồng sóng sẽ va chạm dữ liệu tại anten của AP, gây hỏng gói tin.
+
+Để giải quyết triệt để vấn đề này, chuẩn IEEE 802.11 tích hợp cơ chế bắt tay trước khi truyền:
+\begin{itemize}
+    \item Trạm gửi gói tin ngắn \textbf{RTS (Request to Send)} chứa thông tin thời gian cần chiếm dụng kênh.
+    \item AP phản hồi bằng khung \textbf{CTS (Clear to Send)} broadcast cho toàn bộ các trạm xung quanh biết.
+    \item Tất cả các trạm khác nghe được CTS sẽ thiết lập bộ đếm ảo NAV và tạm ngừng truyền cho đến khi trạm gửi hoàn tất giao dịch.
+\end{itemize}
+
+\section{Băng tần vô tuyến, phân bổ kênh và can nhiễu trong WLAN}
+
+\subsection{Các băng tần vô tuyến phổ biến}
+
+Mạng Wi-Fi hoạt động trên các băng tần vô tuyến thuộc nhóm băng tần công nghiệp, khoa học và y tế (ISM) không cần cấp phép (Unlicensed Bands):
+\begin{itemize}
+    \item \textbf{Băng tần 2.4 GHz (2.400 -- 2.4835 GHz):} Băng tần truyền thống, bước sóng dài nên có khả năng xuyên vật cản (bê tông, gạch đá) rất tốt và phạm vi phủ sóng rộng. Tuy nhiên, băng thông tổng chỉ khoảng 83.5 MHz, chỉ chứa được tối đa 3 kênh độc lập không chồng lấn. Đồng thời, dải tần này bị can nhiễu nặng nề bởi sóng Bluetooth, lò vi sóng và các thiết bị ngoại lai.
+    \item \textbf{Băng tần 5 GHz (5.150 -- 5.850 GHz):} Băng thông rộng lớn lên tới hơn 500 MHz, cung cấp tới 24 kênh không chồng lấn có độ rộng 20 MHz. Tốc độ truyền tải rất cao, ít can nhiễu. Nhược điểm là bước sóng ngắn nên khả năng đâm xuyên tường kém hơn đáng kể so với 2.4 GHz.
+    \item \textbf{Băng tần 6 GHz (5.925 -- 7.125 GHz):} Được áp dụng trong chuẩn Wi-Fi 6E và Wi-Fi 7, mở ra thêm 1.200 MHz phổ tần sạch hoàn toàn, hỗ trợ tới 14 kênh rộng 80 MHz và 7 kênh siêu rộng 160 MHz, chuyên biệt cho các tác vụ đòi hỏi thông lượng gigabit và độ trễ cực thấp.
+\end{itemize}
+
+\subsection{Quy hoạch kênh không chồng lấn tại dải 2.4 GHz}
+
+Tại dải tần 2.4 GHz, phổ sóng được phân thành 11 kênh (tại Bắc Mỹ) hoặc 13 kênh (tại Châu Á và Việt Nam). Khoảng cách giữa các tần số trung tâm chỉ là 5 MHz trong khi độ rộng của mỗi kênh Wi-Fi tiêu chuẩn là 20 MHz hoặc 22 MHz. Do đó, các kênh nằm kề nhau sẽ có dải tần chồng lấn lên nhau.
+
+Trong toàn bộ dải 2.4 GHz, chỉ có đúng \textbf{3 kênh duy nhất hoàn toàn không chồng lấn} là kênh \textbf{1, 6 và 11}. Khi thiết kế mạng Wi-Fi trường học, nguyên tắc quy hoạch cơ bản là phân bổ xen kẽ các kênh 1, 6, 11 giữa các AP kề nhau trên cùng một mặt sàn và giữa các tầng nhà, triệt tiêu tối đa hiện tượng can nhiễu đồng kênh (Co-channel Interference).
+
+\section{Tiến trình phát triển các thế hệ chuẩn Wi-Fi và Công nghệ Wi-Fi 6}
+
+Bảng \ref{tab:wifi_evolution} tóm tắt tiến trình phát triển của các thế hệ chuẩn IEEE 802.11 từ khởi thủy đến nay:
+
+\begin{table}[htbp]
+\centering
+\caption{Tổng hợp so sánh tiến hóa các thế hệ chuẩn mạng không dây IEEE 802.11}
+\label{tab:wifi_evolution}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Chuẩn} & \textbf{Tên gọi} & \textbf{Năm ban hành} & \textbf{Băng tần} & \textbf{Kênh rộng} & \textbf{Tốc độ tối đa} & \textbf{Kỹ thuật điều chế} \\
+\midrule
+802.11b & Wi-Fi 1 & 1999 & 2.4 GHz & 20 MHz & 11 Mbps & DSSS \\
+802.11a & Wi-Fi 2 & 1999 & 5 GHz & 20 MHz & 54 Mbps & OFDM \\
+802.11g & Wi-Fi 3 & 2003 & 2.4 GHz & 20 MHz & 54 Mbps & OFDM \\
+802.11n & Wi-Fi 4 & 2009 & 2.4 / 5 GHz & 20, 40 MHz & 600 Mbps & MIMO, 64-QAM \\
+802.11ac & Wi-Fi 5 & 2013 & 5 GHz & 20, 40, 80, 160 & 6.9 Gbps & MU-MIMO, 256-QAM \\
+802.11ax & \textbf{Wi-Fi 6} & \textbf{2021} & \textbf{2.4 / 5 / 6 GHz} & \textbf{20, 40, 80, 160} & \textbf{9.6 Gbps} & \textbf{OFDMA, 1024-QAM} \\
+802.11be & Wi-Fi 7 & 2024+ & 2.4 / 5 / 6 GHz & Đến 320 MHz & 46 Gbps & MLO, 4096-QAM \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Các công nghệ đột phá của chuẩn Wi-Fi 6 (IEEE 802.11ax)}
+
+Chuẩn IEEE 802.11ax (Wi-Fi 6) được thiết kế đặc thù không chỉ nhằm tăng tốc độ đỉnh (Peak Throughput) mà mục tiêu trọng tâm là cải thiện hiệu quả sử dụng phổ tần trong môi trường có mật độ thiết bị cực cao (High Density -- HD) như giảng đường đại học \cite{khorov2019tutorial}:
+
+\begin{enumerate}
+    \item \textbf{Kỹ thuật đa truy nhập phân chia theo tần số trực giao (OFDMA):} Đây là công nghệ cốt lõi mượn từ mạng di động 4G/5G. Thay vì cho phép một người dùng duy nhất chiếm dụng toàn bộ kênh truyền 20 MHz hoặc 40 MHz tại một thời điểm, OFDMA chia nhỏ kênh sóng thành các khối tần số con gọi là \textbf{Resource Units (RU)}. Một khung truyền vô tuyến có thể phục vụ đồng thời lên tới hàng chục người dùng khác nhau trong cùng một thời điểm, triệt tiêu tình trạng nghẽn hàng đợi đối với các gói tin nhỏ.
+    \item \textbf{Công nghệ MU-MIMO đa người dùng 8x8 cả Uplink và Downlink:} Cho phép AP phát và thu đồng thời nhiều luồng dữ liệu không phụ thuộc tới các nhóm thiết bị khác nhau, nâng gấp đôi hiệu suất truyền dẫn so với Wi-Fi 5 vốn chỉ hỗ trợ MU-MIMO ở chiều Downlink.
+    \item \textbf{Kỹ thuật tô màu định danh bản tin (BSS Coloring):} Trong chuẩn cũ, khi phát hiện bất kỳ tín hiệu nào cùng tần số (dù phát ra từ phòng học kế bên), máy trạm phải hoãn phiên truyền. Wi-Fi 6 bổ sung trường mã màu 6-bit vào phần đầu khung tin. Khi máy trạm nhận thấy sóng mang có mã màu khác với BSS của mình, nó nhận diện đây là tín hiệu xuyên phòng vô hại và vẫn tiếp tục thực hiện phát dữ liệu, giảm thiểu hơn 60\% thời gian chờ đợi vô ích do can nhiễu đồng kênh.
+\end{enumerate}
+
+\section{Kiến trúc quản lý mạng không dây tập trung (Wireless LAN Controller)}
+
+Trong môi trường mạng doanh nghiệp và trường đại học (Enterprise Campus Network), mô hình quản trị truyền thống sử dụng các AP độc lập (Autonomous AP) bộc lộ nhược điểm chí mạng: mỗi AP phải được cấu hình riêng rẽ, không có khả năng tự động điều phối tần số và không thể thực hiện chuyển vùng mượt mà \cite{cisco2021wlan}.
+
+Kiến trúc mạng không dây hiện đại chuyển dịch hoàn toàn sang mô hình \textbf{AP hạng nhẹ kết hợp Bộ điều khiển trung tâm (Lightweight AP + WLC)} dựa trên nguyên lý phân tách lớp điều khiển MAC (Split-MAC Architecture):
+
+\begin{itemize}
+    \item \textbf{Phần MAC cục bộ trên AP (Local MAC):} AP chỉ đảm nhận các tác vụ thời gian thực lớp vật lý như phát sóng RF, mã hóa/giải mã phần cứng, gửi nhận khung tin Beacon và ACK.
+    \item \textbf{Phần MAC tập trung trên WLC (Centralized MAC):} Bộ điều khiển trung tâm WLC đảm nhận việc xử lý xác thực danh tính người dùng (802.1X/RADIUS), chính sách gán VLAN, lọc địa chỉ MAC, định tuyến lưu lượng và quản trị roaming.
+    \item \textbf{Đường hầm CAPWAP (Control and Provisioning of Wireless Access Points):} Toàn bộ lưu lượng điều khiển và dữ liệu người dùng giữa AP và WLC được đóng gói và mã hóa thông qua giao thức đường hầm CAPWAP (cổng UDP 5246 cho luồng Control và 5247 cho luồng Data).
+    \item \textbf{Cơ chế Quản lý tài nguyên vô tuyến tự động (Radio Resource Management -- RRM):} WLC liên tục nhận thông tin đo kiểm môi trường RF từ các AP gửi về để tự động kích hoạt thuật toán gán kênh động (Dynamic Channel Assignment -- DCA) và kiểm soát công suất phát (Transmit Power Control -- TPC), đảm bảo hệ thống luôn tự lành (\textit{Self-healing}) khi có một AP bị sự cố phần cứng.
+\end{itemize}
+
+\section{Cơ chế chuyển vùng nhanh (Fast Roaming: IEEE 802.11r/k/v)}
+
+Chuyển vùng (Roaming) là quá trình thiết bị di động ngắt kết nối với AP hiện tại và thiết lập liên kết mới với một AP lân cận có cường độ sóng mạnh hơn. Trong các mạng Wi-Fi bảo mật truyền thống (WPA2-Enterprise), quá trình roaming đòi hỏi trao đổi lại trọn vẹn quy trình bắt tay 802.1X với máy chủ RADIUS, gây độ trễ từ 500 ms đến 2.000 ms, dẫn đến rớt kết nối cuộc gọi thoại, video hoặc ứng dụng thi trực tuyến.
+
+Hệ thống mạng không dây hiện đại giải quyết bài toán này thông qua bộ ba tiêu chuẩn:
+\begin{itemize}
+    \item \textbf{IEEE 802.11r (Fast BSS Transition -- FT):} Cho phép lưu sẵn các khóa mật mã xác thực giữa WLC và các AP mục tiêu lân cận. Khi thiết bị di chuyển, quá trình bắt tay được rút gọn chỉ còn 4 gói tin trao đổi cục bộ, giảm độ trễ chuyển vùng xuống dưới \textbf{50 ms}.
+    \item \textbf{IEEE 802.11k (Radio Resource Measurement):} AP cung cấp cho máy trạm danh sách báo cáo các AP lân cận tối ưu (Neighbor Report), giúp thiết bị không phải quét toàn bộ các kênh tần số, tiết kiệm pin và đẩy nhanh tốc độ dò sóng.
+    \item \textbf{IEEE 802.11v (BSS Transition Management):} Cho phép WLC chủ động gửi lệnh điều hướng thiết bị di động chuyển sang AP khác gần hơn khi nhận thấy cường độ sóng của AP hiện tại suy yếu, giải quyết triệt để vấn nạn thiết bị ``bám dính'' trạm phát sóng ở xa (\textit{Sticky Client}).
+\end{itemize}
+
+\section{Tiểu kết Chương 1}
+
+Chương 1 đã hệ thống hóa toàn diện các nền tảng lý thuyết cốt lõi về mạng cục bộ không dây WLAN:
+\begin{enumerate}
+    \item Phân tích bản chất các mô hình BSS, ESS và cơ chế truy nhập kênh tránh va chạm CSMA/CA kết hợp bắt tay RTS/CTS.
+    \item Làm rõ đặc thù các băng tần 2.4 GHz, 5 GHz và quy tắc phân bổ 3 kênh không chồng lấn (1, 6, 11).
+    \item Đánh giá sự vượt trội của thế hệ Wi-Fi 6 với các công nghệ then chốt OFDMA, MU-MIMO và BSS Coloring trong việc giải quyết bài toán môi trường mật độ cao.
+    \item Khẳng định tính tất yếu của mô hình quản trị tập trung WLC dựa trên giao thức CAPWAP và bộ giao thức chuyển vùng nhanh IEEE 802.11r/k/v.
+\end{enumerate}
+
+Những nội dung khoa học này là cơ sở vững chắc để tiến hành khảo sát thực địa, chẩn đoán điểm nghẽn tại Trường Đại học Đồng Tháp ở Chương 2 và xây dựng kiến trúc thiết kế tối ưu ở Chương 3.

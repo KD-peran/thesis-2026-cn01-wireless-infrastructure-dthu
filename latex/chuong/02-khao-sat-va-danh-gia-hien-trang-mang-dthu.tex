@@ -1,0 +1,295 @@
+\chapter{Khảo sát và đánh giá hiện trạng mạng không dây tại Trường Đại học Đồng Tháp}
+\label{chap:hien-trang}
+
+Trên cơ sở nền tảng lý thuyết đã được trình bày ở Chương \ref{chap:ly-thuyet}, Chương 2 sẽ đi sâu vào việc khảo sát thực tế, đo kiểm và đánh giá toàn diện hiện trạng hệ thống mạng không dây tại Trường Đại học Đồng Tháp. Nội dung chương này tập trung làm rõ sơ đồ phân bố hạ tầng, đánh giá năng lực chịu tải của thiết bị điều khiển trung tâm (WLC), phân tích dữ liệu quét sóng Wi-Fi thực tế tại các phân khu trọng điểm (Tòa A1, Tòa B3, Tòa B5). Qua đó, chương này sẽ xác định các nguyên nhân ảnh hưởng đến chất lượng mạng, tình trạng can nhiễu đồng kênh và rủi ro từ các thiết bị phát sóng ngoại lai, làm cơ sở cho việc xây dựng giải pháp tối ưu ở Chương \ref{chap:giai-phap}.
+
+\section{Giới thiệu tổng quan hệ thống mạng không dây tại Đại học Đồng Tháp}
+
+Hệ thống mạng không dây tại Trường Đại học Đồng Tháp được triển khai nhằm phục vụ nhu cầu truy cập Internet cho cán bộ, giảng viên và sinh viên trong quá trình học tập, giảng dạy và nghiên cứu khoa học. Wi-Fi hiện diện ở hầu hết các khu vực như giảng đường, phòng thực hành, phòng làm việc hành chính, thư viện và các khu vực sinh hoạt chung trong khuôn viên nhà trường.
+
+Các thiết bị Access Point (AP) được lắp đặt rải rác tại nhiều tòa nhà như A1, A2, A7, A8, A9, C1, C2, H1, H2, H3, B1, B2, B3, B4, B5, B6, Thư viện, Giảng đường 1... và được kết nối về hệ thống mạng lõi nội bộ để cung cấp dịch vụ Internet cho người dùng \cite{dthu2026hientrang}.
+
+\subsection{Sơ đồ tổng thể toàn trường}
+
+Sơ đồ tổng quan của Trường Đại học Đồng Tháp được thể hiện chi tiết tại Hình \ref{fig:tong-the-truong}, bao gồm các phân khu chức năng chính:
+\begin{itemize}
+    \item \textbf{Khu học tập và giảng đường:} Gồm các khối nhà B1, B2, B3, A1, H1, H2, H3, C1, C2 phục vụ giảng dạy lý thuyết, phòng máy vi tính và các phòng thí nghiệm chuyên sâu.
+    \item \textbf{Thư viện Học liệu Lê Vũ Hùng:} Đặt ở vị trí trung tâm khuôn viên, là không gian tự học và tra cứu thông tin số tập trung đông đảo sinh viên.
+    \item \textbf{Khu thể thao và không gian chung:} Sân vận động, nhà thi đấu, hồ bơi, căn tin mở B5 và quảng trường A3.
+    \item \textbf{Khu ký túc xá và sinh hoạt sinh viên:} Khối ký túc xá B6 và các nhà xe sinh viên.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.92\textwidth]{dthu_fig-001.png}
+    \caption{Sơ đồ tổng thể khuôn viên Trường Đại học Đồng Tháp}
+    \label{fig:tong-the-truong}
+\end{figure}
+
+Đặc thù khuôn viên rộng lớn và phân tán thành nhiều khối công trình kiến trúc riêng biệt đặt ra thách thức rất lớn trong việc phủ sóng Wi-Fi liên tục, đòi hỏi phải có chiến lược quy hoạch thiết bị Access Point phù hợp với đặc tính vật lý và mật độ người dùng của từng khu vực.
+
+\subsection{Sơ đồ mạng tổng thể của Trường Đại học Đồng Tháp}
+
+Để hiểu rõ phương thức vận hành và phân bổ luồng dữ liệu của toàn bộ hệ thống, quá trình khảo sát đã thu thập và hệ thống hóa cấu trúc mạng logic thực tế của Nhà trường như minh họa tại Hình \ref{fig:so-do-mang-tong-the}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\textwidth]{dthu_fig-002.png}
+    \caption{Sơ đồ mạng tổng thể tại Trường Đại học Đồng Tháp}
+    \label{fig:so-do-mang-tong-the}
+\end{figure}
+
+Hệ thống được tổ chức theo mô hình mạng phân cấp truyền thống:
+\begin{itemize}
+    \item \textbf{Lớp Lõi (Core Layer):} Bộ định tuyến trung tâm và hệ thống máy chủ đóng vai trò điều phối toàn bộ lưu lượng dữ liệu nội bộ và kết nối ra mạng Internet qua các nhà cung cấp dịch vụ viễn thông (ISP).
+    \item \textbf{Lớp Phân phối (Distribution Layer):} Hạ tầng được phân hoạch thành các nhánh mạng cục bộ ảo (VLAN) độc lập tương ứng với các đơn vị: Khối Hành chính, Khối Giảng đường, Khối Khoa chuyên môn và Khối Ký túc xá.
+    \item \textbf{Lớp Truy cập (Access Layer) và WLAN:} Tại các phân khu, tín hiệu từ Switch phân phối được truyền trực tiếp tới các thiết bị Switch Access và các Access Point (AP) để phát sóng vô tuyến.
+\end{itemize}
+
+\subsection{Mô hình mô phỏng hệ thống trên Cisco Packet Tracer}
+
+Nhằm phục vụ cho công tác phân tích chuyên sâu các điểm nghẽn và làm cơ sở thử nghiệm các giải pháp tối ưu hóa, toàn bộ kiến trúc mạng thực tế ở trên đã được số hóa và mô phỏng trên phần mềm Cisco Packet Tracer (Hình \ref{fig:mo-phong-cisco}).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\textwidth]{dthu_fig-003.png}
+    \caption{Mô hình mô phỏng hạ tầng mạng trên Cisco Packet Tracer}
+    \label{fig:mo-phong-cisco}
+\end{figure}
+
+Việc sử dụng Packet Tracer cho phép thiết lập chính xác các thông số định tuyến, cấu trúc VLAN và mô phỏng các kịch bản lưu lượng truy cập cao trong giờ cao điểm, từ đó đánh giá được độ trễ và tỷ lệ rớt gói trước khi đề xuất giải pháp thiết kế mới.
+
+\section{Khảo sát hạ tầng thiết bị và vị trí lắp đặt Access Point}
+
+\subsection{Thiết bị điều khiển trung tâm (Wireless Switch)}
+
+Hệ thống mạng không dây của Nhà trường hiện đang được quản lý thông qua thiết bị điều khiển \textbf{Motorola RFS6000 Wireless Switch} đặt tại phòng máy chủ trung tâm. Thông số kỹ thuật danh định của thiết bị:
+\begin{itemize}
+    \item Giao diện vật lý: Hỗ trợ 8 cổng kết nối Gigabit Ethernet (10/100/1000 Mbps).
+    \item Khả năng quản lý: Hỗ trợ quản lý độc lập 48 Access Point (có thể mở rộng lên 256 AP khi ghép cụm cluster).
+    \item Năng lực chịu tải (Capacity): Cấp phép truy cập đồng thời tối đa cho \textbf{2.000 thiết bị người dùng} (Concurrent Users).
+    \item Băng thông chuyển mạch (Switching Capacity): 8 Gbps.
+\end{itemize}
+
+\textbf{Đánh giá mức độ đáp ứng và phân tích điểm nghẽn:}
+Với quy mô toàn trường hơn 15.000 sinh viên, lưu lượng kết nối Wi-Fi thực tế biến động rất mạnh theo các khung giờ học tập (Bảng \ref{tab:tai_luong_wlc}).
+
+\begin{table}[htbp]
+\centering
+\caption{Thống kê tải lượng thiết bị kết nối đồng thời trong ngày}
+\label{tab:tai_luong_wlc}
+\begin{tabular}{lcl}
+\toprule
+\textbf{Thời điểm khảo sát} & \textbf{Số lượng thiết bị kết nối} & \textbf{Trạng thái hệ thống WLC} \\
+\midrule
+07h00 -- 08h00 (Đầu giờ sáng) & Khoảng 850 thiết bị & Hoạt động ổn định, cấp IP nhanh chóng \\
+09h30 -- 10h30 (Cao điểm sáng) & Khoảng 2.150 thiết bị & Vượt ngưỡng 2.000, trễ nhịp cấp phát IP \\
+14h00 -- 15h30 (Cao điểm chiều) & Khoảng 2.300 thiết bị & Treo DHCP, từ chối cấp IP cho máy mới \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Khi tổng số thiết bị kết nối vượt ngưỡng 2.000, bộ điều khiển rơi vào trạng thái cạn kiệt tài nguyên cấp phát (DHCP Exhaustion) và quá tải năng lực xử lý. Đây là nguyên nhân trực tiếp giải thích hiện tượng sinh viên thấy điện thoại báo sóng Wi-Fi đầy vạch nhưng không thể nhận được địa chỉ IP để truy cập mạng.
+
+\subsection{Khảo sát vị trí lắp đặt Access Point tại các khối công trình}
+
+Quá trình khảo sát đã lập bản đồ định vị các trạm phát sóng AP trên bản vẽ mặt bằng các tòa nhà:
+
+\subsubsection{Khối giảng đường mật độ cao (Tòa C2, Tòa A1)}
+Tại các tòa nhà phục vụ học lý thuyết đại trà (Tòa C2 -- Hình \ref{fig:ap-c2} và Tòa A1 -- Hình \ref{fig:ap-a1}), các AP được lắp dọc theo trục hành lang chính với cự ly 12m -- 15m. Mật độ lắp đặt dày đặc nhằm chia nhỏ tải lượng thiết bị kết nối, tuy nhiên cách bố trí này đòi hỏi quy hoạch kênh tần số rất khắt khe để tránh giao thoa sóng xuyên tầng.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.88\textwidth]{dthu_fig-004.png}
+    \caption{Sơ đồ vị trí lắp đặt Access Point tại Tòa C2}
+    \label{fig:ap-c2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.88\textwidth]{dthu_fig-005.png}
+    \caption{Sơ đồ vị trí lắp đặt Access Point tại Tòa A1}
+    \label{fig:ap-a1}
+\end{figure}
+
+\subsubsection{Khối phòng thực hành và nghiên cứu (Tòa A2, A7, A8, A9, A4)}
+Các tòa nhà này chủ yếu phục vụ các phòng máy tính và phòng thí nghiệm (Hình \ref{fig:ap-a2} đến Hình \ref{fig:ap-a4}). Phần lớn máy tính cố định sử dụng cáp LAN, do đó các AP Wi-Fi được bố trí với mật độ vừa phải tại hành lang và phòng hội đồng, ưu tiên vùng phủ sóng băng tần 5 GHz.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{dthu_fig-006.png}
+    \caption{Sơ đồ vị trí lắp đặt Access Point tại Tòa A2}
+    \label{fig:ap-a2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{dthu_fig-007.png}
+    \caption{Sơ đồ vị trí lắp đặt Access Point tại Tòa A7}
+    \label{fig:ap-a7}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{dthu_fig-008.png}
+    \caption{Sơ đồ vị trí lắp đặt Access Point tại Tòa A8}
+    \label{fig:ap-a8}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{dthu_fig-009.png}
+    \caption{Sơ đồ vị trí lắp đặt Access Point tại Tòa A9}
+    \label{fig:ap-a9}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{dthu_fig-010.png}
+    \caption{Sơ đồ vị trí lắp đặt Access Point tại Tòa A4}
+    \label{fig:ap-a4}
+\end{figure}
+
+\subsubsection{Khối nhà Hành chính và Văn phòng (Tòa B1, B2, B3)}
+Khối nhà hành chính (Hình \ref{fig:ap-b1} đến Hình \ref{fig:ap-b3}) có đặc điểm nhiều phòng làm việc ngăn cách bởi tường bê tông kiên cố. Sóng vô tuyến từ hành lang suy hao mạnh khi đâm xuyên vào các góc khuất, tạo ra vùng lõm sóng.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{dthu_fig-011.png}
+    \caption{Sơ đồ vị trí lắp đặt Access Point tại Tòa B1}
+    \label{fig:ap-b1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{dthu_fig-012.png}
+    \caption{Sơ đồ vị trí lắp đặt Access Point tại Tòa B2}
+    \label{fig:ap-b2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{dthu_fig-013.png}
+    \caption{Sơ đồ vị trí lắp đặt Access Point tại Tòa B3}
+    \label{fig:ap-b3}
+\end{figure}
+
+\subsubsection{Khối không gian mở Căn tin B5 và Ký túc xá B6}
+Tòa B5 (Hình \ref{fig:ap-b5}) là không gian căn tin mở hoàn toàn, tập trung hàng trăm sinh viên vào giờ nghỉ giải lao. AP được treo cao trên trần để phủ sóng rộng, song việc thiếu vách ngăn khiến sóng các AP tràn lấn mạnh mẽ. Trong khi đó, Ký túc xá B6 (Hình \ref{fig:ap-b6}) bố trí AP dọc hành lang nhằm đâm xuyên vào các phòng nội trú.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.82\textwidth]{dthu_fig-014.png}
+    \caption{Sơ đồ vị trí lắp đặt Access Point tại Tòa B5 (Căn tin)}
+    \label{fig:ap-b5}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.82\textwidth]{dthu_fig-015.png}
+    \caption{Sơ đồ vị trí lắp đặt Access Point tại KTX B6}
+    \label{fig:ap-b6}
+\end{figure}
+
+\section{Phân tích vùng phủ sóng và can nhiễu vô tuyến thực tế}
+
+Để kiểm chứng định lượng các nhược điểm vật lý của hệ thống, tác giả đã sử dụng phần mềm chuyên dụng \textbf{Wi-Fi Analyzer} quét toàn bộ phổ sóng tại các khu vực trọng điểm trên băng tần 2.4 GHz và 5 GHz. Bảng \ref{tab:do_kiem_song} thể hiện các chỉ số cường độ tín hiệu (RSSI) và tỷ số tín hiệu trên nhiễu (SNR) ghi nhận tại hiện trường:
+
+\begin{table}[htbp]
+\centering
+\caption{Chỉ số RSSI và SNR đo kiểm thực tế tại các khu vực trọng điểm}
+\label{tab:do_kiem_song}
+\begin{tabular}{lccl}
+\toprule
+\textbf{Khu vực quét phổ} & \textbf{RSSI trung bình} & \textbf{Chỉ số SNR} & \textbf{Đánh giá mức độ can nhiễu} \\
+\midrule
+Tòa A1 (Giảng đường lớn) & -68 dBm & 18 dB & Trung bình (Can nhiễu đồng kênh rất cao) \\
+Tòa B3 (Hành chính) & -74 dBm & 12 dB & Yếu (Suy hao tín hiệu vật lý lớn do tường) \\
+Tòa B5 (Không gian mở) & -62 dBm & 22 dB & Khá (Chồng lấn dải tần 2.4 GHz nghiêm trọng) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Khu vực Giảng đường A1: Áp lực từ mật độ thiết bị lớn}
+
+Biểu đồ phân tích kênh truyền thực tế tại Giảng đường A1 (Hình \ref{fig:wifi-a1}) bộc lộ tình trạng can nhiễu đồng kênh nội bộ nghiêm trọng. Nhiều điểm phát sóng mang tên SSID \texttt{DTHU-STUDENT} và \texttt{DTHU-GUEST} cùng chen chúc phát trên Kênh 6 thay vì phân bổ đều vào 3 kênh độc lập (1, 6, 11). Sự xung đột này khiến máy trạm liên tục phải lùi thời gian phát tin (Airtime Contention), làm giảm tốc độ thực tế của mạng.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.72\textwidth]{dthu_fig-050.png}
+    \caption{Biểu đồ quét sóng Wi-Fi thực tế tại Giảng đường A1}
+    \label{fig:wifi-a1}
+\end{figure}
+
+\subsection{Khu vực Hành chính B3: Lỗ hổng từ thiết bị ngoại lai (Rogue AP)}
+
+Tại khu vực Tòa B3 (Hình \ref{fig:wifi-b3}), kết quả quét sóng ghi nhận sự xuất hiện của các sóng Wi-Fi tự phát ngoài hệ thống chính quy, tiêu biểu là SSID \texttt{TP-LINK\_E9A6}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.72\textwidth]{dthu_fig-051.png}
+    \caption{Biểu đồ quét sóng Wi-Fi thực tế tại Tòa B3 (Phát hiện Rogue AP)}
+    \label{fig:wifi-b3}
+\end{figure}
+
+Việc cán bộ hoặc người dùng tự ý cắm các Router Wi-Fi dân dụng vào cổng mạng LAN nội bộ tạo ra các rủi ro rất lớn:
+\begin{itemize}
+    \item Các thiết bị này tự động chạy dịch vụ DHCP Server, cấp phát IP ngẫu nhiên ra mạng nội bộ, gây xung đột địa chỉ IP và làm tê liệt kết nối Internet của các phòng ban lân cận.
+    \item Trở thành ``cửa sau'' (Backdoor) bảo mật nguy hiểm do sử dụng mật khẩu yếu, không được quản lý bởi WLC.
+\end{itemize}
+
+\subsection{Khu vực Căn tin B5: Hỗn loạn tín hiệu trong không gian mở}
+
+Tại Tòa B5 (Hình \ref{fig:wifi-b5}), do không có tường ngăn cách, sóng từ các AP giao thoa diện rộng. Các tín hiệu SSID phân bố chồng chéo lấn át lên nhau từ kênh 1 đến kênh 11, làm tỷ lệ mất gói tin tăng vọt khi sinh viên tập trung đông.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.72\textwidth]{dthu_fig-052.png}
+    \caption{Biểu đồ quét sóng Wi-Fi thực tế tại Căn tin B5}
+    \label{fig:wifi-b5}
+\end{figure}
+
+\section{Khảo sát tốc độ, hiệu năng và ba điểm nghẽn cốt lõi}
+
+\subsection{Quy trình đo kiểm định lượng}
+Để có số liệu khoa học chính xác, quá trình đo kiểm được tiến hành theo quy chuẩn:
+\begin{itemize}
+    \item Thiết bị thử nghiệm: Laptop tiêu chuẩn được trang bị Card mạng Intel Wi-Fi 6 AX201 160MHz.
+    \item Phần mềm: SpeedZEN / Speedtest đo kiểm tốc độ tải xuống (Download), tải lên (Upload) và độ trễ phản hồi (Ping).
+    \item Phương pháp: Tại mỗi điểm khảo sát, tiến hành đo lặp lại 05 lần liên tiếp ở hai khung giờ (Giờ thấp điểm ít người và Giờ cao điểm đông người), lấy kết quả trung bình cộng (Bảng \ref{tab:speedtest}).
+\end{itemize}
+
+\begin{table}[htbp]
+\centering
+\caption{Kết quả đo kiểm băng thông mạng theo khu vực và thời điểm}
+\label{tab:speedtest}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Khu vực} & \textbf{Khung giờ} & \textbf{Mật độ thiết bị} & \textbf{Download} & \textbf{Upload} & \textbf{Độ trễ Ping} \\
+\midrule
+A1 (Giảng đường) & 06h00 (Thấp điểm) & $\sim 50$ & 20.08 Mbps & 18.02 Mbps & 23.45 ms \\
+                 & 09h00 (Cao điểm)  & $\sim 300$ & \textbf{5.19 Mbps} & \textbf{6.98 Mbps} & \textbf{110.0 ms} \\
+\midrule
+B3 (Hành chính)  & 07h00 (Thấp điểm) & $\sim 40$ & 23.89 Mbps & 20.18 Mbps & 28.90 ms \\
+                 & 10h00 (Cao điểm)  & $\sim 150$ & 15.35 Mbps & 16.45 Mbps & 130.0 ms \\
+\midrule
+B5 (Căn tin mở)  & 07h20 (Thấp điểm) & $\sim 40$ & 19.80 Mbps & 18.89 Mbps & 20.05 ms \\
+                 & 11h30 (Cao điểm)  & $\sim 200$ & 9.09 Mbps & 10.29 Mbps & 100.0 ms \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Số liệu thực nghiệm cho thấy tại Giảng đường A1 trong giờ cao điểm, tốc độ Download sụt giảm từ 20.08 Mbps xuống chỉ còn 5.19 Mbps (mức suy giảm gần \textbf{74\%}), trong khi độ trễ Ping tăng vọt lên 110 ms.
+
+\subsection{Ba điểm nghẽn kỹ thuật cốt lõi của hệ thống mạng hiện hữu}
+
+Tổng hợp kết quả khảo sát thực địa và số liệu đo kiểm, khóa luận bóc tách thành công 3 điểm nghẽn mang tính gốc rễ:
+\begin{enumerate}
+    \item \textbf{Năng lực bộ điều khiển trung tâm WLC không đủ đáp ứng:} Bộ điều khiển Motorola RFS6000 bị trần cứng ở mốc 2.000 kết nối, trong khi nhu cầu thực tế của toàn trường vượt trên 2.300 thiết bị vào giờ cao điểm, gây ra hiện tượng tràn bảng DHCP và từ chối dịch vụ.
+    \item \textbf{Can nhiễu đồng kênh và tranh chấp thời gian truyền sóng (Airtime):} Việc lạm dụng dải tần 2.4 GHz và sử dụng các AP chuẩn cũ (802.11n/ac) khiến các máy trạm phải xếp hàng chờ đợi giải phóng kênh sóng, kéo tụt hiệu năng toàn mạng.
+    \item \textbf{Lỗ hổng bảo mật và xung đột từ thiết bị Rogue AP:} Cơ chế bảo mật dùng chung mật khẩu Pre-Shared Key (WPA2-PSK) không thể quản lý định danh người dùng cá nhân, kết hợp với các Rogue AP tự phát gây nhiễu và đe dọa an ninh mạng lõi.
+\end{enumerate}
+
+\section{Tiểu kết Chương 2}
+
+Chương 2 đã cung cấp bức tranh toàn cảnh, chân thực và định lượng về hạ tầng mạng không dây tại Trường Đại học Đồng Tháp. Bằng phương pháp đo kiểm khách quan kết hợp phân tích mặt bằng kiến trúc và mô phỏng trên Cisco Packet Tracer, chương này đã làm rõ căn nguyên của tình trạng chập chờn, nghẽn mạng trong giờ cao điểm. Ba điểm nghẽn cốt lõi đã được định danh chính xác là tiền đề khoa học thực tiễn để xây dựng kiến trúc tổng thể và giải pháp thiết kế toàn diện trong Chương \ref{chap:giai-phap}.

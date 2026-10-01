@@ -1,0 +1,182 @@
+% Bản LaTeX của báo cáo khóa luận tốt nghiệp.
+% Đề tài: Thiết kế kiến trúc tổng thể hạ tầng mạng không dây tại Trường Đại học Đồng Tháp
+% Sinh viên: Nguyễn Thị Kỳ Duyên (MSSV: 0023410647 - Lớp: ĐHCNTT23B-CS)
+% GVHD: TS. Lương Thái Ngọc
+% Build:  .\build.ps1   (chạy từ thư mục gốc)
+
+\documentclass[12pt,a4paper,oneside]{report}
+\providecommand{\SuspendTagging}[1]{}
+\providecommand{\ResumeTagging}[1]{}
+\usepackage{xltabular}
+\usepackage{booktabs}
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}
+\usepackage[top=2.5cm,bottom=2.5cm,left=3.5cm,right=2.0cm]{geometry}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{amsmath,amssymb}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc,shapes.geometric,arrows.meta,positioning}
+
+% Định nghĩa các kiểu cột co giãn thông minh cho xltabular / tabularx:
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+
+% Cấu hình hiển thị code listings sạch sẽ:
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  backgroundcolor=\color{gray!5},
+  frame=single,
+  rulecolor=\color{gray!30},
+  numbers=none,
+  tabsize=2,
+  breaklines=true,
+  breakatwhitespace=true,
+  showstringspaces=false,
+  keepspaces=true
+}
+
+\usepackage{mathptmx} % Phông chữ Times New Roman chuẩn học thuật
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{indentfirst}
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf, labelsep=period, justification=centering}
+
+% Quy chuẩn thụt đầu dòng và dãn đoạn:
+\setlength{\parindent}{1.0cm}
+\setlength{\parskip}{4pt plus 1pt minus 1pt}
+
+% Định dạng tiêu đề Chapter có đánh số (căn giữa, chuẩn tỷ lệ học thuật)
+\titleformat{\chapter}[display]
+  {\normalfont\Large\bfseries\centering}
+  {\MakeUppercase{\chaptertitlename}\ \thechapter}
+  {10pt}
+  {\LARGE\MakeUppercase}
+\titlespacing*{\chapter}{0pt}{10pt}{25pt}
+
+% Định dạng tiêu đề Chapter* không đánh số (Lời cam đoan, Lời cảm ơn, Mở đầu...)
+\titleformat{name=\chapter,numberless}[display]
+  {\normalfont\LARGE\bfseries\centering}
+  {}
+  {0pt}
+  {\MakeUppercase}
+\titlespacing*{name=\chapter,numberless}{0pt}{10pt}{25pt}
+
+% Định dạng Section (Mục cấp 1: 1.1, 1.2...)
+\titleformat{\section}
+  {\normalfont\large\bfseries}
+  {\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{14pt plus 2pt minus 2pt}{6pt plus 1pt minus 1pt}
+
+% Định dạng Subsection (Mục cấp 2: 1.1.1, 1.1.2...)
+\titleformat{\subsection}
+  {\normalfont\normalsize\bfseries}
+  {\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{10pt plus 2pt minus 2pt}{4pt plus 1pt minus 1pt}
+
+% Định dạng Subsubsection (Mục cấp 3: 1.1.1.1...)
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\itshape}
+  {\thesubsubsection}{1em}{}
+\titlespacing*{\subsubsection}{0pt}{8pt plus 2pt minus 2pt}{3pt plus 1pt minus 1pt}
+
+\usepackage[hidelinks,unicode]{hyperref}
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\addbibresource{../bao-cao/tai-lieu-tham-khao.bib}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+
+\onehalfspacing
+\graphicspath{{images/}}
+
+\begin{document}
+
+%% ---------- Trang bìa ----------
+\begin{titlepage}
+\begin{tikzpicture}[remember picture, overlay]
+  % Khung viền ngoài (nét đậm 2.5pt)
+  \draw[line width = 2.5pt, color = black] 
+    ($(current page.north west) + (2.9cm, -1.9cm)$) 
+    rectangle 
+    ($(current page.south east) + (-1.4cm, 1.9cm)$);
+  % Khung viền trong (nét thanh 0.8pt)
+  \draw[line width = 0.8pt, color = black] 
+    ($(current page.north west) + (3.15cm, -2.15cm)$) 
+    rectangle 
+    ($(current page.south east) + (-1.15cm, 2.15cm)$);
+  % Họa tiết góc vuông kép trang trí 4 góc nghệ thuật
+  \draw[line width = 0.6pt] ($(current page.north west) + (3.27cm, -2.27cm)$) -- ++(0.8cm, 0);
+  \draw[line width = 0.6pt] ($(current page.north west) + (3.27cm, -2.27cm)$) -- ++(0, -0.8cm);
+
+  \draw[line width = 0.6pt] ($(current page.north east) + (-1.27cm, -2.27cm)$) -- ++(-0.8cm, 0);
+  \draw[line width = 0.6pt] ($(current page.north east) + (-1.27cm, -2.27cm)$) -- ++(0, -0.8cm);
+
+  \draw[line width = 0.6pt] ($(current page.south west) + (3.27cm, 2.27cm)$) -- ++(0.8cm, 0);
+  \draw[line width = 0.6pt] ($(current page.south west) + (3.27cm, 2.27cm)$) -- ++(0, 0.8cm);
+
+  \draw[line width = 0.6pt] ($(current page.south east) + (-1.27cm, 2.27cm)$) -- ++(-0.8cm, 0);
+  \draw[line width = 0.6pt] ($(current page.south east) + (-1.27cm, 2.27cm)$) -- ++(0, 0.8cm);
+\end{tikzpicture}
+
+\centering
+\vspace*{-0.5cm}
+{\large TRƯỜNG ĐẠI HỌC ĐỒNG THÁP}\\
+{\large\bfseries KHOA CÔNG NGHỆ VÀ KỸ THUẬT}\\[1.6cm]
+\includegraphics[width=2.5cm]{logo-dthu.png}\\[0.4cm]
+
+{\large\bfseries KHÓA LUẬN TỐT NGHIỆP ĐẠI HỌC}\\[0.35cm]
+{\large Ngành: Khoa học máy tính}\\[0.2cm]
+{\large Chuyên ngành: Mạng Máy Tính và An Ninh}\\[1.4cm]
+
+{\LARGE\bfseries THIẾT KẾ KIẾN TRÚC TỔNG THỂ HẠ TẦNG MẠNG KHÔNG DÂY TẠI TRƯỜNG ĐẠI HỌC ĐỒNG THÁP}\\[1.8cm]
+
+\begin{tabular}{rl}
+  \textbf{Sinh viên thực hiện:} & Nguyễn Thị Kỳ Duyên \\
+  \textbf{Mã số sinh viên:} & 0023410647 \\
+  \textbf{Lớp:} & ĐHCNTT23B-CS \\
+  \textbf{Khóa đào tạo:} & 2023 -- 2027 \\
+  \textbf{Giảng viên hướng dẫn:} & TS. Lương Thái Ngọc \\
+\end{tabular}
+
+\vfill
+{\large\bfseries Đồng Tháp, tháng 04/2027}
+\end{titlepage}
+
+%% ---------- Phần đầu: Cam đoan, Cảm ơn, Mục lục ----------
+\pagenumbering{roman}
+
+\input{chuong/00-loi-cam-doan-cam-on.tex}
+
+\tableofcontents
+\input{chuong/00-danh-muc-tu-viet-tat-va-thuat-ngu.tex}
+\listoffigures
+\listoftables
+
+%% ---------- Nội dung chính ----------
+\clearpage
+\pagenumbering{arabic}
+
+\input{chuong/00-loi-mo-dau.tex}
+
+\input{chuong/01-tong-quan-va-co-so-ly-thuyet-mang-khong-day.tex}
+
+\input{chuong/02-khao-sat-va-danh-gia-hien-trang-mang-dthu.tex}
+
+\input{chuong/03-thiet-ke-kien-truc-tong-the-mo-phong-va-giai-phap.tex}
+
+\input{chuong/04-ket-luan-va-huong-phat-trien.tex}
+
+%% ---------- Tài liệu tham khảo ----------
+\printbibliography[heading=bibintoc,title={Tài liệu tham khảo}]
+
+%% ---------- Phụ lục ----------
+\input{chuong/05-phu-luc.tex}
+
+\end{document}

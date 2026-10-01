@@ -1,0 +1,48 @@
+name: Kiem tra
+
+# Chay khi day len main va khi chay tay tu tab Actions.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'latex/**'
+      - 'bao-cao/**'
+      - '.github/workflows/kiem-tra.yml'
+      - '.github/scripts/**'
+  workflow_dispatch:
+
+jobs:
+  build-latex:
+    name: Build ban LaTeX
+    runs-on: ubuntu-latest
+    # Anh nay co san vntex (bang ma T5 cho tieng Viet) va biber.
+    container: texlive/texlive:latest-full
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build bao cao va slide
+        working-directory: latex
+        # Dung chinh script ma sinh vien chay tren may, de CI va may cuc bo
+        # khong bao gio lech nhau.
+        run: bash scripts/build.sh khoa-luan.tex slide-bao-ve.tex
+
+      - name: Tai PDF len
+        uses: actions/upload-artifact@v4
+        with:
+          name: ban-pdf
+          path: latex/outputs/*.pdf
+          if-no-files-found: error
+          retention-days: 30
+
+  kiem-tra-trich-dan:
+    name: Kiem tra tai lieu tham khao
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Doi chieu trich dan voi danh muc
+        run: python .github/scripts/kiem_tra_trich_dan.py

@@ -1,0 +1,66 @@
+\chapter{Kết luận và hướng phát triển}
+\label{chap:ket-luan}
+
+\section{Kết luận chung và các kết quả đạt được}
+
+Khóa luận tốt nghiệp với đề tài \textbf{“Thiết kế kiến trúc tổng thể hạ tầng mạng không dây tại Trường Đại học Đồng Tháp”} đã đi đến những kết quả nghiên cứu cuối cùng, hoàn thành toàn diện 100\% các mục tiêu và nhiệm vụ đã cam kết trong Đề cương nghiên cứu được Khoa Công nghệ và Kỹ thuật phê duyệt.
+
+Các đóng góp khoa học và thực tiễn chính của đề tài bao gồm:
+\begin{enumerate}
+    \item \textbf{Về mặt hệ thống hóa cơ sở lý thuyết:}
+      \begin{itemize}
+        \item Khóa luận đã phân tích sâu sắc các nguyên lý kỹ thuật của mạng cục bộ không dây (WLAN), cấu trúc các loại khung tin, cơ chế truy nhập kênh tránh xung đột CSMA/CA kết hợp bắt tay RTS/CTS.
+        \item Làm rõ bản chất các bước đột phá công nghệ của chuẩn Wi-Fi 6 (IEEE 802.11ax): công nghệ đa truy nhập phân chia theo tần số trực giao (OFDMA), công nghệ truyền tải đa luồng MU-MIMO hai chiều và cơ chế tô màu định danh bản tin BSS Coloring trong việc giải quyết bài toán môi trường mật độ cao.
+        \item Hệ thống hóa kiến trúc quản trị mạng tập trung dựa trên bộ điều khiển WLC và giao thức đường hầm CAPWAP, cùng bộ ba tiêu chuẩn chuyển vùng nhanh IEEE 802.11r/k/v.
+      \end{itemize}
+    \item \textbf{Về mặt khảo sát và chẩn đoán hiện trạng:}
+      \begin{itemize}
+        \item Thu thập và lập bản đồ vị trí lắp đặt hệ thống Access Point tại hầu hết các khối tòa nhà trong toàn bộ khuôn viên Trường Đại học Đồng Tháp (A1, A2, A7, A8, A9, B1, B2, B3, B4, B5, B6, H1, H2, H3, C1, C2, Thư viện, Giảng đường 1).
+        \item Thực hiện đo kiểm định lượng phổ sóng vô tuyến (RSSI, SNR) bằng phần mềm Wi-Fi Analyzer và đo kiểm thông lượng mạng (Download, Upload, Ping) bằng Speedtest tại các khung giờ cao điểm và thấp điểm.
+        \item Chẩn đoán chính xác 3 điểm nghẽn cốt lõi: Năng lực bộ điều khiển Motorola RFS6000 bị chạm trần 2.000 thiết bị, can nhiễu đồng kênh nghiêm trọng trên dải 2.4 GHz khiến tốc độ tải xuống giờ cao điểm giảm gần 74\%, và lỗ hổng an ninh từ các thiết bị Rogue AP tự phát.
+      \end{itemize}
+    \item \textbf{Về mặt thiết kế kiến trúc và giải pháp công nghệ:}
+      \begin{itemize}
+        \item Xây dựng thành công bản thiết kế kiến trúc phân cấp 3 lớp chuẩn mực (Core -- Distribution -- Access) kết hợp mô hình WLC tập trung có cấu hình dự phòng High Availability (HA) $N+1$, sẵn sàng đáp ứng từ 5.000 đến 10.000 thiết bị kết nối đồng thời trong 5 năm tới.
+        \item Quy hoạch có trọng điểm chuẩn Wi-Fi 6 cho các khu vực mật độ cao và tái luân chuyển thiết bị chuẩn cũ cho các văn phòng hành chính, tối ưu hóa ngân sách đầu tư.
+        \item Đề xuất phân hoạch mạng logic VLAN với không gian địa chỉ IP /20 (hơn 8.000 IP cho sinh viên), kết hợp chiến lược rút ngắn thời gian thuê DHCP Lease Time xuống 2 -- 4 giờ để giải quyết dứt điểm lỗi cạn kiệt IP.
+        \item Thiết lập cơ chế định tuyến theo chính sách PBR đa WAN ưu tiên khối giảng viên và cân bằng tải khối sinh viên; chuyển đổi sang phương thức xác thực tập trung an toàn cấp doanh nghiệp 802.1X/EAP trên nền máy chủ Active Directory/LDAP sẵn có.
+      \end{itemize}
+    \item \textbf{Về mặt mô phỏng và kiểm chứng:}
+      \begin{itemize}
+        \item Số hóa và mô phỏng thành công toàn bộ mô hình kiến trúc đề xuất trên phần mềm chuyên dụng Cisco Packet Tracer 8.x.
+        \item Kiểm chứng thực nghiệm các kịch bản chuyển vùng Fast Roaming (độ trễ $< 50$ ms, không mất gói tin), kiểm chứng tính năng cách ly máy trạm lớp 2 (Client Isolation) và xây dựng bảng so sánh định lượng chứng minh tính vượt trội của giải pháp mới.
+      \end{itemize}
+\end{enumerate}
+
+\section{Hạn chế của đề tài}
+
+Mặc dù đã nỗ lực tiếp cận bài toán một cách khoa học và hệ thống, song dưới góc độ của một khóa luận tốt nghiệp bậc đại học, đề tài vẫn còn tồn tại một số giới hạn khách quan:
+\begin{itemize}
+    \item \textbf{Hạn chế về điều kiện triển khai vật lý thực tế:} Do rào cản về kinh phí đầu tư thiết bị cấp doanh nghiệp, đề tài chưa thể tiến hành lắp đặt thử nghiệm trực tiếp các thiết bị Wi-Fi 6 và bộ điều khiển WLC trên hệ thống mạng thực của Nhà trường. Các số liệu đánh giá băng thông và khả năng chịu tải sau tối ưu hiện dừng lại ở mức mô phỏng kỹ thuật và dự phóng khoa học.
+    \item \textbf{Giới hạn về thời gian lấy mẫu dữ liệu vô tuyến:} Các phép đo kiểm phổ sóng vô tuyến chủ yếu được thực hiện tại một số thời điểm cao điểm đại diện trong học kỳ, chưa bao quát được toàn bộ biến động lưu lượng liên tục trong cả năm học (như các đợt thi tập trung toàn trường hoặc các kỳ hội thao lớn).
+    \item \textbf{Thách thức về sự phân mảnh thiết bị người dùng (BYOD):} Hiệu năng thực tế của mạng Wi-Fi còn phụ thuộc đáng kể vào phần cứng card mạng của các thiết bị máy tính, điện thoại do sinh viên sử dụng. Khi vẫn còn nhiều thiết bị đời cũ (chỉ hỗ trợ Wi-Fi 4 trên băng tần 2.4 GHz), hệ thống vẫn phải chia sẻ thời gian phát sóng để tương thích ngược.
+\end{itemize}
+
+\section{Hướng phát triển trong tương lai}
+
+Để tiếp tục hoàn thiện và đưa các kết quả nghiên cứu vào ứng dụng thực tiễn sâu rộng hơn, tác giả đề xuất các định hướng phát triển tiếp theo:
+
+\subsection{Triển khai thí điểm (Proof of Concept -- PoC) tại Giảng đường A1}
+Phối hợp với Trung tâm Công nghệ thông tin của Trường Đại học Đồng Tháp để lắp đặt thí điểm một cụm thiết bị Access Point Wi-Fi 6 kết nối WLC tại khu vực Giảng đường Tòa A1. Qua đó, tiến hành đo kiểm thực tế các chỉ số thông lượng, độ trễ và đánh giá mức độ hài lòng của sinh viên, làm cơ sở thực nghiệm vững chắc để bảo vệ dự toán đầu tư nhân rộng cho toàn trường.
+
+\subsection{Ứng dụng Trí tuệ nhân tạo trong vận hành mạng (AIOps)}
+Tích hợp các nền tảng quản trị mạng thông minh sử dụng Trí tuệ nhân tạo và Học máy (AI/ML):
+\begin{itemize}
+    \item Tự động hóa phân tích nguyên nhân gốc rễ (Root Cause Analysis): Phân tích hàng triệu bản ghi nhật ký (Syslog) để chẩn đoán sự cố mạng tức thời (lỗi sai mật khẩu, lỗi cấp phát DHCP hay can nhiễu sóng).
+    \item Dự báo phụ tải mạng (Load Forecasting): Học máy thói quen di chuyển và sử dụng mạng của sinh viên theo thời khóa biểu để chủ động phân bổ băng thông trước khi xảy ra nghẽn mạng.
+\end{itemize}
+
+\subsection{Phát triển Cổng thông tin xác thực Captive Portal và Bản đồ nhiệt (Heatmap)}
+\begin{itemize}
+    \item Tích hợp cổng Captive Portal liên kết với cơ sở dữ liệu sinh viên của Nhà trường, cho phép hiển thị thông báo thời khóa biểu, lịch thi và tin tức đào tạo ngay khi người dùng đăng nhập Wi-Fi.
+    \item Ứng dụng phân tích dữ liệu vị trí (Location Analytics) để vẽ bản đồ nhiệt mật độ sinh viên theo thời gian thực (Heatmap), hỗ trợ Nhà trường trong công tác quản lý an ninh khuôn viên và tối ưu hóa không gian phòng tự học.
+\end{itemize}
+
+\subsection{Nghiên cứu chuẩn bị hạ tầng sẵn sàng cho thế hệ Wi-Fi 7 (IEEE 802.11be)}
+Theo dõi sát sao tiến trình chuẩn hóa và thương mại hóa của công nghệ Wi-Fi 7 (băng thông kênh 320 MHz, công nghệ truyền đa liên kết MLO). Việc nâng cấp hạ tầng cáp mạng truyền dẫn Cat6A và Switch Core hôm nay chính là bước đi đón đầu chiến lược, sẵn sàng đáp ứng thông lượng khổng lồ của Wi-Fi 7 trong thập kỷ tiếp theo.

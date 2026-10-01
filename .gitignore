@@ -1,0 +1,75 @@
+# LaTeX build artifacts
+*.aux
+*.log
+*.nav
+*.snm
+*.out
+*.toc
+*.vrb
+*.bbl
+*.blg
+*.bcf
+*.lof
+*.lot
+*.run.xml
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+
+# Thu muc build tam
+outputs/
+build/
+new/
+tool/
+noi-dung-tong-hop/*.ps1
+
+# Office temp files
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node / JavaScript
+node_modules/
+dist/
+.next/
+*.tsbuildinfo
+
+# .NET
+bin/
+obj/
+*.user
+
+# Bien moi truong va bi mat - khong bao gio commit
+.env
+.env.*
+# .env.example chi chua TEN bien, khong chua gia tri that -> phai theo doi.
+!.env.example
+*.pem
+*.key
+appsettings.Development.json
+
+# Dump co so du lieu va du lieu thuc nghiem nang
+thuc-nghiem/du-lieu/**
+!thuc-nghiem/du-lieu/.gitkeep
+*.dump
+*.db
+*.sqlite
+
+# He dieu hanh / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.vscode/
+.idea/
+
+# PDF sinh ra tu build LaTeX (ban nguon la .tex)
+latex/*.pdf
+

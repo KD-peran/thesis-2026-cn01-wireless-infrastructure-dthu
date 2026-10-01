@@ -1,0 +1,99 @@
+\chapter*{Phụ lục}
+\addcontentsline{toc}{chapter}{Phụ lục}
+
+\section*{Phụ lục 1: Cấu hình mẫu VLAN và Định tuyến trên Switch Core Lớp 3 (Cisco IOS)}
+
+Đoạn mã lệnh cấu hình các phân hệ mạng logic VLAN, gán địa chỉ Gateway và thiết lập dịch vụ chuyển tiếp DHCP (IP Helper-Address) trên Switch Core tại trung tâm dữ liệu:
+
+\begin{lstlisting}[language=bash, caption={Cấu hình VLAN và SVI trên Switch Core Cisco}]
+! ==============================================================
+! 1. KHOI TAO CAC VLAN CHUYEN DUNG THEO QUY HOACH
+! ==============================================================
+vlan 10
+ name VLAN_DTHU_STAFF
+!
+vlan 20
+ name VLAN_STUDENT_BLOCK_A
+!
+vlan 30
+ name VLAN_STUDENT_BLOCK_B_C_H
+!
+vlan 40
+ name VLAN_DTHU_GUEST
+!
+vlan 99
+ name VLAN_MANAGEMENT_WLC_AP
+!
+! ==============================================================
+! 2. CAU HINH GIAO DIEN DINH TUYEN (SVI) VA DHCP RELAY AGENT
+! ==============================================================
+interface Vlan10
+ description Gateway cho Can bo Giang vien
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+!
+interface Vlan20
+ description Gateway Sinh vien Khoi A (Subnet /20)
+ ip address 10.10.0.1 255.255.240.0
+ ip helper-address 192.168.10.10
+ no shutdown
+!
+interface Vlan30
+ description Gateway Sinh vien Khoi B, C, H (Subnet /20)
+ ip address 10.20.0.1 255.255.240.0
+ ip helper-address 192.168.10.10
+ no shutdown
+!
+interface Vlan40
+ description Gateway mang Khach vang lai
+ ip address 172.16.40.1 255.255.255.0
+ ip helper-address 192.168.10.10
+ no shutdown
+!
+interface Vlan99
+ description Mang quan tri WLC va AP (Management)
+ ip address 172.16.99.1 255.255.255.0
+ no shutdown
+!
+! ==============================================================
+! 3. CAU HINH DUONG TRUYEN TRUNK KET NOI SANG DISTRIBUTION SWITCH
+! ==============================================================
+interface TenGigabitEthernet1/1/1
+ description Ket noi Trunk sang Distribution Switch Toa A1
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,99
+ no shutdown
+\end{lstlisting}
+
+\section*{Phụ lục 2: Cấu hình WLC tích hợp Máy chủ Xác thực RADIUS (802.1X/EAP)}
+
+Đoạn mã lệnh cấu hình dịch vụ AAA trên bộ điều khiển mạng không dây Cisco WLC thông qua giao diện dòng lệnh (CLI):
+
+\begin{lstlisting}[language=bash, caption={Cấu hình AAA RADIUS và tạo SSID WPA3-Enterprise trên Cisco WLC}]
+! ==============================================================
+! 1. KHAI BAO MAY CHU RADIUS SERVER (FREERADIUS / WINDOWS NPS)
+! ==============================================================
+config radius auth add 1 192.168.10.5 1812 ascii-hex DthuSecretRadiusKey2026
+config radius auth enable 1
+!
+! 2. TAO WLAN DTHU-STAFF VOI XAC THUC 802.1X ENTERPRISE
+! ==============================================================
+config wlan create 10 DTHU-STAFF DTHU-STAFF
+config wlan interface 10 management
+config wlan security wpa enable 10
+config wlan security wpa wpa2 enable 10
+config wlan security wpa wpa2 ciphers aes enable 10
+config wlan security wpa akm 802.1x enable 10
+config wlan radius auth add 10 1
+config wlan enable 10
+!
+! 3. TAO WLAN DTHU-STUDENT HO TRO FAST ROAMING (802.11r/k/v)
+! ==============================================================
+config wlan create 20 DTHU-STUDENT DTHU-STUDENT
+config wlan security wpa akm 802.1x enable 20
+config wlan security ft enable 20
+config wlan radio-measurement enable 20
+config wlan bss-transition enable 20
+config wlan client-isolation enable 20
+config wlan enable 20
+\end{lstlisting}

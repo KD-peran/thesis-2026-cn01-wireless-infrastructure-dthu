@@ -1,0 +1,190 @@
+\chapter{Thiết kế kiến trúc tổng thể, mô phỏng và đề xuất giải pháp}
+\label{chap:giai-phap}
+
+Dựa trên kết quả khảo sát thực trạng và 3 điểm nghẽn kỹ thuật đã bóc tách ở Chương \ref{chap:hien-trang}, Chương 3 đề xuất phương án thiết kế kiến trúc tổng thể mạng không dây cho Trường Đại học Đồng Tháp. Phương án tuân thủ nghiêm ngặt các nguyên tắc thiết kế mạng chuẩn mực của doanh nghiệp (Enterprise WLAN), kết hợp nâng cấp có trọng điểm công nghệ Wi-Fi 6, bộ điều khiển WLC dung lượng lớn, phân hoạch VLAN/Subnet thông minh, cơ chế chuyển vùng Fast Roaming và xác thực tập trung 802.1X. Toàn bộ giải pháp được số hóa và kiểm nghiệm trên mô hình mô phỏng Cisco Packet Tracer.
+
+\section{Nguyên tắc và mô hình thiết kế kiến trúc tổng thể}
+
+\subsection{Các nguyên tắc thiết kế cốt lõi}
+
+Quá trình xây dựng phương án kiến trúc mới quán triệt 3 nguyên tắc nền tảng:
+\begin{enumerate}
+    \item \textbf{Tính sẵn sàng cao (High Availability -- HA):} Hệ thống mạng phải đảm bảo khả năng vận hành liên tục 24/7. Tại các phân đoạn trọng yếu (Core Layer, WLC, đường truyền Internet), phải luôn có cơ chế dự phòng $N+1$ hoặc cấu hình Active-Standby để khi có sự cố phần cứng, thời gian gián đoạn chuyển đổi mạng (Failover) diễn ra dưới 1 giây, không làm gián đoạn các kỳ thi trắc nghiệm trực tuyến hoặc các dịch vụ quản lý đào tạo.
+    \item \textbf{Khả năng mở rộng linh hoạt (Scalability):} Kiến trúc thiết kế phải có tầm nhìn tối thiểu 5 năm (2026 -- 2030). Cấu trúc phân hoạch địa chỉ IP và năng lực của WLC phải sẵn sàng dung nạp thêm hàng ngàn thiết bị đầu cuối và mở rộng thêm các tòa nhà mới mà không phải thiết kế lại từ đầu.
+    \item \textbf{Tối ưu hóa chi phí đầu tư (Cost-effectiveness):} Kết hợp hài hòa giữa việc đầu tư thiết bị thế hệ mới (Wi-Fi 6, PoE+) tại các khu vực mật độ cao và tái điều chuyển, tận dụng tối đa các Access Point cũ (chuẩn 802.11ac) còn hoạt động tốt cho các phòng ban hành chính ít người; tận dụng nền tảng máy chủ xác thực sẵn có để tiết kiệm ngân sách cho Nhà trường.
+\end{enumerate}
+
+\subsection{Mô hình kiến trúc phân cấp 3 lớp (Hierarchical Campus Network)}
+
+Hệ thống mạng tổng thể của Nhà trường được thiết kế theo mô hình 3 lớp phân cấp tiêu chuẩn quốc tế \cite{cisco2021wlan}:
+\begin{itemize}
+    \item \textbf{Lớp Lõi (Core Layer):} Gồm cụm Switch Core Lớp 3 tốc độ cao (Switching Capacity $\ge 128$ Gbps), đóng vai trò xương sống truyền dẫn, liên kết tốc độ 10 Gbps quang học giữa các khối nhà về trung tâm dữ liệu và định tuyến lưu lượng liên VLAN.
+    \item \textbf{Lớp Phân phối (Distribution Layer):} Đặt tại từng khối công trình lớn (Khối A, Khối B, Khối H, Khối C, Thư viện), chịu trách nhiệm tập hợp lưu lượng từ các tầng, áp dụng các chính sách an ninh (Access Control Lists -- ACL), chính sách chất lượng dịch vụ (QoS) và định tuyến lưu lượng Internet ra nhiều đường cáp quang ISP.
+    \item \textbf{Lớp Truy cập (Access Layer) và WLAN:} Gồm các Switch Access hỗ trợ cấp nguồn \textbf{PoE+ (IEEE 802.3at)} kết nối cáp Cat6A tới các trạm phát sóng Wi-Fi 6. Toàn bộ các AP hoạt động ở chế độ Lightweight, được quản lý tập trung và thiết lập cấu hình đồng bộ qua đường hầm CAPWAP từ hệ thống WLC.
+\end{itemize}
+
+\section{Quy hoạch tiêu chuẩn thiết bị phát sóng Wi-Fi 6 tại các điểm nóng}
+
+Điểm nghẽn nghiêm trọng nhất của Trường Đại học Đồng Tháp hiện nay là tình trạng nghẽn sóng và suy giảm tốc độ tại các khu vực tập trung đông sinh viên. Để giải quyết triệt để, khóa luận đề xuất quy hoạch chuẩn hóa thiết bị phát sóng \textbf{Wi-Fi 6 (IEEE 802.11ax)} cho các phân khu mật độ cao:
+\begin{itemize}
+    \item \textbf{Khu vực Giảng đường lý thuyết lớn (Tòa A1, Tòa C2):} Trang bị các dòng AP Wi-Fi 6 chuyên dụng cho môi trường mật độ cao (High-Density AP) hỗ trợ MU-MIMO $4\times 4$ và OFDMA với 37 Resource Units (RU). Mỗi AP có khả năng phục vụ đồng thời lên đến 150 -- 200 thiết bị hoạt động tích cực mà không xảy ra hiện tượng nghẽn hàng đợi.
+    \item \textbf{Khu vực Căn tin mở B5 và Thư viện:} Lắp đặt các AP Wi-Fi 6 kết hợp công nghệ anten định hướng và kích hoạt tính năng \textbf{BSS Coloring}. Tính năng này cho phép các máy trạm bỏ qua tín hiệu can nhiễu từ các AP lân cận, giúp thông lượng mạng trong không gian mở luôn duy trì trên 50 Mbps.
+    \item \textbf{Khối phòng ban hành chính (B1, B2, B3) và phòng học nhỏ:} Tái sử dụng các AP chuẩn 802.11ac (Wi-Fi 5) hiện có của Nhà trường sau khi đã được tháo dỡ và kiểm định. Do các phòng ban này chỉ có từ 5 đến 15 người dùng, các AP chuẩn cũ vẫn đáp ứng hoàn hảo các tác vụ văn phòng và in ấn không dây, giúp giảm trên 40\% chi phí mua sắm thiết bị mới.
+\end{itemize}
+
+\section{Đồng bộ hóa kỹ thuật và quản trị mạng thông minh}
+
+\subsection{Cơ sở khoa học nâng cấp Bộ điều khiển trung tâm (WLC)}
+
+Căn cứ vào kế hoạch phát triển của Nhà trường và xu hướng bùng nổ thiết bị cá nhân (BYOD), khóa luận tiến hành bài toán dự báo tăng trưởng tải lượng mạng không dây giai đoạn 2026 -- 2030 (Bảng \ref{tab:du_bao_tai}).
+
+\begin{table}[htbp]
+\centering
+\caption{Dự báo tăng trưởng thiết bị kết nối mạng WLAN DTHU (2026 -- 2030)}
+\label{tab:du_bao_tai}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Chỉ tiêu dự báo kỹ thuật} & \textbf{Năm 2026} & \textbf{Năm 2028} & \textbf{Năm 2030} \\
+\midrule
+Quy mô sinh viên và cán bộ giảng viên & 15.000 & 16.500 & 18.000 \\
+Hệ số thiết bị cá nhân trung bình (BYOD/người) & 1.2 thiết bị & 1.5 thiết bị & 1.8 thiết bị \\
+Tổng số thiết bị tiềm năng trong toàn trường & 18.000 thiết bị & 24.750 thiết bị & 32.400 thiết bị \\
+\textbf{Lưu lượng kết nối đồng thời đỉnh điểm (30\%)} & \textbf{$\sim 5.400$ thiết bị} & \textbf{$\sim 7.400$ thiết bị} & \textbf{$\sim 9.700$ thiết bị} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Số liệu dự báo chỉ rõ: Ngay trong năm 2026, tải lượng đỉnh điểm cần phục vụ đã đạt khoảng 5.400 thiết bị, vượt xa giới hạn 2.000 kết nối của bộ điều khiển RFS6000 hiện tại. Đến năm 2030, nhu cầu kết nối đồng thời sẽ chạm mốc gần 10.000 thiết bị.
+
+Do đó, khóa luận đề xuất giải pháp trang bị hệ thống WLC thế hệ mới với năng lực quản lý từ \textbf{5.000 đến 10.000 thiết bị kết nối đồng thời}, hỗ trợ tối thiểu 250 -- 500 AP. Đồng thời, cấu hình cơ chế dự phòng nóng \textbf{High Availability (HA) $N+1$}: khi WLC chính (Primary) gặp sự cố, WLC phụ (Secondary) tự động đồng bộ trạng thái phiên làm việc (Stateful Switchover -- SSO) trong thời gian tính bằng mili-giây, người dùng hoàn toàn không cảm nhận được sự gián đoạn mạng.
+
+WLC mới tích hợp bộ công cụ Quản lý tài nguyên vô tuyến tự động (Radio Resource Management -- RRM):
+\begin{itemize}
+    \item \textbf{Dynamic Channel Assignment (DCA):} Tự động quét và điều chỉnh kênh sóng cho từng AP theo chu kỳ, ưu tiên phân bổ các kênh 1, 6, 11 trên dải 2.4 GHz và 24 kênh sạch trên dải 5 GHz, triệt tiêu can nhiễu đồng kênh.
+    \item \textbf{Transmit Power Control (TPC):} Tự động tăng công suất phát khi phát hiện một AP lân cận bị mất nguồn (tính năng phủ sóng lỗ hổng -- Coverage Hole Detection), đảm bảo vùng phủ sóng của trường không bị gián đoạn.
+\end{itemize}
+
+\subsection{Kích hoạt công nghệ chuyển vùng nhanh (Fast Roaming)}
+
+Để sinh viên có thể vừa di chuyển giữa các khối nhà vừa tham gia các buổi học trực tuyến hoặc tải học liệu mà không bị rớt mạng, WLC được cấu hình kích hoạt đồng thời bộ ba tiêu chuẩn:
+\begin{itemize}
+    \item \textbf{IEEE 802.11r (Fast Transition):} Thiết lập cơ chế trao đổi trước khóa xác thực mã hóa giữa các AP. Khi thiết bị chuyển trạm, thời gian chuyển vùng giảm từ 1.200 ms xuống \textbf{dưới 50 ms}.
+    \item \textbf{IEEE 802.11k và 802.11v:} AP tự động cung cấp danh sách AP kế cận tối ưu và chủ động điều hướng các thiết bị sóng yếu sang AP gần nhất, xóa bỏ triệt để hiện tượng thiết bị bám dính AP ở xa (\textit{Sticky Client}).
+\end{itemize}
+
+\subsection{Phân hoạch mạng luận lý VLAN, dải IP và chiến lược DHCP}
+
+Nhà trường hiện có 3 đường truyền Internet cáp quang từ các nhà mạng khác nhau. Khóa luận đề xuất phân hoạch cấu trúc VLAN và địa chỉ IP khoa học (Bảng \ref{tab:quy_hoach_vlan}):
+
+\begin{table}[htbp]
+\centering
+\caption{Quy hoạch VLAN, không gian địa chỉ IP và chính sách DHCP đề xuất}
+\label{tab:quy_hoach_vlan}
+\small
+\begin{tabular}{cllllc}
+\toprule
+\textbf{VLAN} & \textbf{Đối tượng} & \textbf{Dải IP (Subnet)} & \textbf{Số lượng IP} & \textbf{SSID} & \textbf{Lease Time} \\
+\midrule
+10 & Cán bộ / Giảng viên & 192.168.10.0/24 & 254 & \texttt{DTHU-STAFF} & 24 giờ \\
+20 & Sinh viên (Khối Tòa A) & 10.10.0.0/20 & 4.094 & \texttt{DTHU-STUDENT} & \textbf{2 -- 4 giờ} \\
+30 & Sinh viên (Khối Tòa B, C, H) & 10.20.0.0/20 & 4.094 & \texttt{DTHU-STUDENT} & \textbf{2 -- 4 giờ} \\
+40 & Khách vãng lai / Hội thảo & 172.16.40.0/24 & 254 & \texttt{DTHU-GUEST} & 1 giờ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Chiến lược giải quyết dứt điểm lỗi cạn kiệt IP:}
+\begin{itemize}
+    \item Sử dụng mặt nạ mạng \textbf{/20} cho khối sinh viên, tạo ra hơn 8.000 địa chỉ IP khả dụng, đáp ứng vượt trội nhu cầu đỉnh điểm 5.400 thiết bị.
+    \item \textbf{Rút ngắn thời gian thuê DHCP (DHCP Lease Time):} Thay vì cấu hình 24 giờ như trước, thời gian thuê IP của mạng sinh viên được rút ngắn xuống \textbf{2 đến 4 giờ} (tương đương độ dài 1 ca học). Khi sinh viên tan học hoặc di chuyển ra khỏi trường, máy chủ DHCP sẽ nhanh chóng thu hồi địa chỉ IP để cấp phát ngay cho các sinh viên ca sau, chấm dứt hoàn toàn hiện tượng cạn kiệt địa chỉ IP.
+\end{itemize}
+
+\subsection{Điều hướng lưu lượng mạng đa WAN (Multi-WAN Routing)}
+
+Tại Switch Core Lớp 3, cấu hình phân luồng lưu lượng:
+\begin{itemize}
+    \item \textbf{Phân hệ Cán bộ/Giảng viên (VLAN 10):} Sử dụng chính sách định tuyến theo chính sách \textbf{PBR (Policy-Based Routing)} để đi ra đường truyền Internet cáp quang có độ trễ thấp và độ tin cậy cao nhất, ưu tiên tuyệt đối cho công tác điều hành, hội nghị truyền hình và bảo mật cơ sở dữ liệu điểm số.
+    \item \textbf{Phân hệ Sinh viên (VLAN 20, 30):} Được cấu hình cân bằng tải động (Dynamic Load Balancing) chia đều qua 2 đường truyền cáp quang dung lượng lớn còn lại, đảm bảo băng thông rộng cho sinh viên học tập mà không bao giờ gây ảnh hưởng đến mạng của giảng viên.
+\end{itemize}
+
+\subsection{Tăng cường an toàn thông tin và kiểm soát Rogue AP}
+
+\begin{itemize}
+    \item \textbf{Triển khai xác thực tập trung 802.1X/EAP (WPA2/WPA3-Enterprise):} Thay thế việc dùng chung mật khẩu Wi-Fi dễ bị rò rỉ. Mỗi sinh viên và giảng viên sử dụng chính tài khoản email hoặc mã số sinh viên/cán bộ của Nhà trường để đăng nhập Wi-Fi. Hệ thống WLC kết nối đến máy chủ \textbf{FreeRADIUS} hoặc dịch vụ \textbf{Network Policy Server (NPS)} trên nền máy chủ Active Directory/LDAP sẵn có của DTHU. Giải pháp này không phát sinh thêm chi phí phần mềm bản quyền nhưng nâng cao mức độ bảo mật lên mức tối đa.
+    \item \textbf{Cách ly máy trạm lớp 2 (Layer 2 Client Isolation):} Kích hoạt trên SSID \texttt{DTHU-STUDENT} và \texttt{DTHU-GUEST}. Các thiết bị di động kết nối cùng một AP chỉ có thể truy cập ra Internet, bị cấm tuyệt đối việc giao tiếp ngang hàng (Client-to-Client), ngăn chặn triệt để nguy cơ tin tặc quét cổng (Port Scanning), nghe lén dữ liệu (ARP Spoofing) hoặc lây lan mã độc nội bộ.
+    \item \textbf{Hệ thống phòng chống xâm nhập không dây (WIDS/WIPS):} Các AP Wi-Fi 6 định kỳ quét môi trường để phát hiện các thiết bị phát sóng trái phép (Rogue AP). Khi phát hiện router lạ tự ý cắm vào mạng LAN, WLC sẽ gửi gói tin Deauthentication để cô lập sóng của thiết bị đó và gửi cảnh báo định vị vị trí cổng Switch tới quản trị viên.
+\end{itemize}
+
+\section{Nâng cấp hạ tầng truyền dẫn vật lý và cấp nguồn PoE+}
+
+Để phát huy tối đa thông lượng tốc độ cao của Wi-Fi 6 (đạt trên 1 Gbps), hệ thống truyền dẫn vật lý được nâng cấp đồng bộ:
+\begin{itemize}
+    \item \textbf{Thiết bị chuyển mạch cấp nguồn PoE+ (IEEE 802.3at):} Nâng cấp các Switch Access tại các tầng lên chuẩn PoE+ có công suất tối thiểu 30W/cổng. Các AP Wi-Fi 6 thế hệ mới khi bật toàn bộ các luồng anten MU-MIMO $4\times 4$ và chip xử lý OFDMA yêu cầu mức công suất từ 22W -- 26W, chuẩn PoE cũ (802.3af 15.4W) sẽ không thể cấp đủ nguồn khiến AP bị hạ bậc hiệu năng.
+    \item \textbf{Hạ tầng cáp mạng Cat6/Cat6A:} Thay thế các tuyến cáp mạng Cat5e cũ nát bằng cáp xoắn đôi chống nhiễu Cat6A, đảm bảo băng thông truyền dẫn 10 Gbps trong cự ly 100m và khả năng tiêu tán nhiệt tốt khi chạy dòng điện PoE+ liên tục trong các hộp kỹ thuật kín.
+\end{itemize}
+
+\section{Mô phỏng kiểm chứng trên Cisco Packet Tracer và Đánh giá định lượng}
+
+\subsection{Xây dựng mô hình mô phỏng trên Cisco Packet Tracer}
+
+Toàn bộ phương án thiết kế kiến trúc phân cấp 3 lớp, bộ điều khiển WLC, máy chủ RADIUS, máy chủ DHCP và các cụm AP Wi-Fi 6 đã được triển khai mô phỏng trên môi trường Cisco Packet Tracer 8.x:
+\begin{enumerate}
+    \item Thiết lập cấu hình Trunking 802.1Q và định tuyến liên VLAN trên Core Switch.
+    \item Cấu hình cổng kết nối WLC với các AP thông qua đường hầm CAPWAP ảo.
+    \item Cấu hình dịch vụ AAA trên WLC kết nối đến máy chủ RADIUS IP 192.168.10.5 để kiểm thử quá trình xác thực EAP.
+    \item Thử nghiệm kịch bản cấp phát IP đồng thời cho hàng trăm Client mô phỏng tại VLAN 20 và VLAN 30: thời gian nhận IP đạt dưới 1.5 giây, không xảy ra xung đột.
+    \item Thử nghiệm di chuyển máy trạm giữa hai AP: tiến trình chuyển vùng diễn ra trơn tru, luồng gửi gói tin ICMP (Ping) không bị mất gói tin nào (\textit{Zero Packet Loss}).
+\end{enumerate}
+
+\subsection{Đánh giá so sánh định lượng hiệu quả trước và sau tối ưu}
+
+Bảng \ref{tab:so_sanh_dinh_luong} tổng hợp các chỉ số kỹ thuật đo kiểm thực tế hiện trạng (Chương 2) đối chiếu với các kết quả mô phỏng và hiệu năng kỳ vọng của hệ thống mới sau khi nâng cấp đồng bộ:
+
+\begin{table}[htbp]
+\centering
+\caption{So sánh định lượng các chỉ số kỹ thuật then chốt trước và sau tối ưu}
+\label{tab:so_sanh_dinh_luong}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Chỉ số đánh giá kỹ thuật} & \textbf{Hiện trạng (Khảo sát Chương 2)} & \textbf{Kỳ vọng sau tối ưu (Phương án mới)} \\
+\midrule
+Năng lực chịu tải đồng thời (WLC) & $\sim 2.000$ thiết bị (Thường xuyên quá tải) & \textbf{$> 10.000$ thiết bị} (Đủ cho 5 năm tới) \\
+Mức độ can nhiễu đồng kênh & Rất cao (Lỗi quy hoạch chồng lấn dải tần) & \textbf{Rất thấp} (Thuật toán RRM/DCA tự động) \\
+Độ trễ phản hồi (Ping) giờ cao điểm & $> 100$ ms & \textbf{$< 30$ ms} (Wi-Fi 6 OFDMA triệt tiêu trễ) \\
+Bảo mật xác thực người dùng & Mật khẩu PSK dùng chung (Rủi ro cao) & \textbf{802.1X/EAP} (Định danh cá nhân 100\%) \\
+Thời gian chuyển vùng (Roaming) & Kém (Thường bị ngắt kết nối $1-2$s) & \textbf{$< 50$ ms} (Nhờ IEEE 802.11r/k/v mượt mà) \\
+Tỷ lệ mất gói tin (Packet Loss) & 7\% -- 12\% trong giờ cao điểm & \textbf{$< 2\%$} (Đảm bảo hội nghị truyền hình) \\
+Khả năng dự phòng lỗi phần cứng & Không có (RFS6000 đơn lẻ, rủi ro cao) & \textbf{Dự phòng High Availability (HA) $N+1$} \\
+Băng thông kết nối mạng máy trạm & Đạt 5 -- 9 Mbps trong giờ cao điểm & \textbf{Đạt $> 35$ Mbps} đồng đều tại mọi vị trí \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Đề xuất lộ trình triển khai 3 giai đoạn}
+
+Để việc áp dụng thiết kế vào thực tế tại Trường Đại học Đồng Tháp diễn ra an toàn, không làm gián đoạn việc giảng dạy, khóa luận đề xuất lộ trình triển khai chia làm 3 giai đoạn:
+\begin{itemize}
+    \item \textbf{Giai đoạn 1: Nâng cấp lớp Lõi Core và Bộ điều khiển WLC (Thực hiện trong dịp nghỉ hè):}
+      \begin{itemize}
+        \item Lắp đặt cấu hình hệ thống Switch Core mới và cụm WLC dự phòng tại Trung tâm dữ liệu.
+        \item Thiết lập các dải VLAN /20, cấu hình DHCP Server và tích hợp dịch vụ xác thực 802.1X với máy chủ Active Directory/LDAP của Nhà trường.
+      \end{itemize}
+    \item \textbf{Giai đoạn 2: Tái cấu trúc và nâng cấp thiết bị phát sóng AP (Thực hiện vào các ngày cuối tuần):}
+      \begin{itemize}
+        \item Tháo dỡ các AP chuẩn cũ tại Giảng đường A1, C2, B5 và Thư viện. Thay thế Switch Access PoE+ và kéo lại cáp Cat6A.
+        \item Lắp đặt các trạm phát sóng Wi-Fi 6 mới tại các vị trí đã quy hoạch.
+        \item Đưa các AP chuẩn cũ còn hoạt động tốt về lắp đặt bổ sung cho các phòng ban khối Hành chính B1, B2, B3.
+      \end{itemize}
+    \item \textbf{Giai đoạn 3: Tinh chỉnh tự động và giám sát dài hạn (Thực hiện xuyên suốt học kỳ):}
+      \begin{itemize}
+        \item Kích hoạt toàn diện các thuật toán quản lý vô tuyến tự động (RRM, Fast Roaming).
+        \item Theo dõi các báo cáo phân tích phổ sóng và tỷ lệ chuyển vùng từ WLC để tinh chỉnh công suất phát vô tuyến tối ưu nhất.
+      \end{itemize}
+\end{itemize}
+
+\section{Tiểu kết Chương 3}
+
+Chương 3 đã hoàn thiện trọn vẹn giải pháp thiết kế kiến trúc tổng thể hạ tầng mạng không dây cho Trường Đại học Đồng Tháp. Với cách tiếp cận hiện đại, giải pháp đã xử lý đồng bộ từ lớp vật lý (PoE+, cáp Cat6A, AP Wi-Fi 6) đến lớp mạng logic (VLAN, Subnet /20, DHCP thu hồi nhanh, PBR đa WAN) và lớp quản trị an ninh (WLC tập trung dự phòng HA, xác thực 802.1X/RADIUS, cách ly máy trạm lớp 2).
+
+Kết quả mô phỏng trên Cisco Packet Tracer và bảng so sánh định lượng đã chứng minh tính ưu việt vượt trội của thiết kế mới: nâng gấp 5 lần năng lực chịu tải đồng thời, giảm trên 70\% độ trễ và triệt tiêu hoàn toàn các nguy cơ rớt mạng giờ cao điểm. Lộ trình triển khai 3 giai đoạn khả thi là giải pháp thiết thực, sẵn sàng chuyển giao cho Nhà trường ứng dụng trong thực tế.
