@@ -7,11 +7,11 @@ description: Viet hoac mo rong mot chuong bao cao khoa luan theo dung rang buoc 
 
 ## Khi nao dung
 
-Nguoi dung yeu cau viet, mo rong, hoac soan lai noi dung trong `bao-cao/`.
+Nguoi dung yeu cau viet, mo rong, hoac soan lai noi dung trong `latex/chuong/`.
 
 ## Buoc 1: Xac dinh chuong va rang buoc
 
-Doc chuong dang lam trong `bao-cao/`, va doc `bao-cao/de-cuong-khoa-luan.md` de biet de
+Doc chuong dang lam trong `latex/chuong/`, va doc `thu-tuc-khoa/de-cuong-khoa-luan.md` de biet de
 tai da cam ket nhung gi. Noi dung chuong phai nhat quan voi de cuong.
 
 ## Buoc 2: Kiem tra du lieu dau vao co that khong
@@ -21,7 +21,7 @@ Truoc khi viet, xac dinh phan nay can gi:
 | Can gi | Lay o dau | Neu chua co |
 | --- | --- | --- |
 | So lieu do dac | `thuc-nghiem/ket-qua/` | De o TODO, ghi ro can do gi |
-| Tai lieu tham khao | `bao-cao/tai-lieu-tham-khao.bib` | Ghi ro can tim tai lieu ve chu de gi |
+| Tai lieu tham khao | `latex/tai-lieu-tham-khao.bib` | Ghi ro can tim tai lieu ve chu de gi |
 | Thong tin khao sat | Bien ban trong `huong-dan/bien-ban/` | Hoi nguoi dung |
 | Anh chup man hinh | `latex/images/` | Ghi ro can chup man hinh nao |
 

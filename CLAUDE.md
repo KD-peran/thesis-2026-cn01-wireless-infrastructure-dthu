@@ -19,7 +19,7 @@ Hướng dẫn cho Claude Code / Trợ lý AI khi làm việc trên repository n
 Đây là những quy tắc bất biến quan trọng nhất. Vi phạm một trong ba là lỗi liêm chính học thuật:
 
 1. **Không bịa số liệu đo kiểm:** Mọi con số khảo sát vùng phủ sóng, RSSI, SNR, thông lượng Throughput (Download/Upload) và độ trễ Ping phải đối chiếu chính xác từ dữ liệu thực tế tại các tòa nhà DTHU trong `thuc-nghiem/` hoặc trích xuất có căn cứ khoa học. Chưa đo thì để ô `TODO` và nêu rõ là đang thiếu, tuyệt đối không ước lượng hoặc lấy số cho có.
-2. **Không bịa tài liệu tham khảo:** Không tự ý thêm nguồn không có thật vào `bao-cao/tai-lieu-tham-khao.bib`. Mọi tiêu chuẩn IEEE (802.11a/b/g/n/ac/ax/be, 802.11r/k/v), sách giáo trình chuẩn (Matthew Gast, Kurose & Ross, Stallings, Cisco Design Guide) phải chính xác thông tin xuất bản, tác giả, năm và DOI/URL.
+2. **Không bịa tài liệu tham khảo:** Không tự ý thêm nguồn không có thật vào `latex/tai-lieu-tham-khao.bib`. Mọi tiêu chuẩn IEEE (802.11a/b/g/n/ac/ax/be, 802.11r/k/v), sách giáo trình chuẩn (Matthew Gast, Kurose & Ross, Stallings, Cisco Design Guide) phải chính xác thông tin xuất bản, tác giả, năm và DOI/URL.
 3. **Không bịa dữ liệu học vụ:**
    - Cơ sở đào tạo duy nhất: **Trường Đại học Đồng Tháp (DTHU) — Khoa Công nghệ và Kỹ thuật**.
    - Sinh viên thực hiện: **Nguyễn Thị Kỳ Duyên** (MSSV: `0023410647` — Lớp: `ĐHCNTT23B-CS`).
@@ -60,8 +60,7 @@ Hướng dẫn cho Claude Code / Trợ lý AI khi làm việc trên repository n
 | Loại nội dung | Thư mục |
 |:---|:---|
 | Trang web tài liệu Docsify, dashboard tiến độ, báo cáo tuần | `docs/` |
-| Báo cáo khóa luận LaTeX, slide Beamer bảo vệ, hình ảnh, PDF xuất ra | `latex/` |
-| Các chương báo cáo dạng Markdown nguyên bản, danh mục BibTeX | `bao-cao/` |
+| Báo cáo khóa luận LaTeX, slide Beamer bảo vệ, danh mục BibTeX, hình ảnh, PDF xuất ra | `latex/` |
 | Hồ sơ học vụ: Đơn đăng ký, kế hoạch tuần, đề cương duyệt | `thu-tuc-khoa/` |
 | Quy định trường, hướng dẫn biểu mẫu, rubric chấm điểm | `huong-dan/` |
 | File mô phỏng Cisco Packet Tracer (.pkt), script cấu hình WLC/RADIUS | `code/` |

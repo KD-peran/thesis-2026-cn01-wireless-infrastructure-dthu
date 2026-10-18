@@ -42,7 +42,7 @@ vi sao, khong lang le day sang tuan sau.
 ## Buoc 4: Cap nhat trang thai
 
 Neu buoi gap chot mot chuc nang da xong, cap nhat cot trang thai trong bang chuc nang cam
-ket o `bao-cao/de-cuong-khoa-luan.md`.
+ket o `thu-tuc-khoa/de-cuong-khoa-luan.md`.
 
 ## Nguyen tac
 

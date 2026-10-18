@@ -20,7 +20,7 @@ Mọi Agent và Subagent khi sinh nội dung báo cáo, slide hoặc tài liệu
 ## 2. Ba Quy Tắc Chống Bịa (Liêm Chính Học Thuật)
 
 1. **Không bịa số liệu đo kiểm:** Mọi con số khảo sát vùng phủ sóng, RSSI, SNR, thông lượng Throughput (Download/Upload) và độ trễ Ping phải đối chiếu chính xác từ dữ liệu thực tế tại các tòa nhà DTHU trong `thuc-nghiem/` hoặc trích xuất có căn cứ khoa học. Chưa đo thì để ô `TODO` và nêu rõ là đang thiếu, tuyệt đối không ước lượng hoặc lấy số cho có.
-2. **Không bịa tài liệu tham khảo:** Không tự ý thêm nguồn không có thật vào `bao-cao/tai-lieu-tham-khao.bib`. Mọi tiêu chuẩn IEEE (802.11a/b/g/n/ac/ax/be, 802.11r/k/v), sách giáo trình chuẩn (Matthew Gast, Kurose & Ross, Stallings, Cisco Design Guide) phải chính xác thông tin xuất bản, tác giả, năm và DOI/URL.
+2. **Không bịa tài liệu tham khảo:** Không tự ý thêm nguồn không có thật vào `latex/tai-lieu-tham-khao.bib`. Mọi tiêu chuẩn IEEE (802.11a/b/g/n/ac/ax/be, 802.11r/k/v), sách giáo trình chuẩn (Matthew Gast, Kurose & Ross, Stallings, Cisco Design Guide) phải chính xác thông tin xuất bản, tác giả, năm và DOI/URL.
 3. **Không bịa dữ liệu học vụ:** Mọi thông tin về Trường, Khoa, Ngành, Lớp, MSSV, Giảng viên hướng dẫn phải đối chiếu chuẩn 100% từ bảng cấu hình hoặc `thu-tuc-khoa/de-cuong-khoa-luan.md`. Tuyệt đối không dùng mẫu của trường khác.
 
 ---
@@ -59,7 +59,7 @@ Mọi Agent và Subagent khi sinh nội dung báo cáo, slide hoặc tài liệu
 
 ### 6.2. Agent Soạn thảo Chương Báo cáo (`soan-chuong-bao-cao`)
 * **Vai trò:** Chắp bút và chuẩn hóa nội dung các chương báo cáo học thuật từ cơ sở lý thuyết, số liệu khảo sát thực địa đến phương án thiết kế kỹ thuật.
-* **Đảm bảo:** Trích dẫn tài liệu tham khảo chính xác theo chuẩn BibLaTeX, đồng bộ giữa các bản thảo Markdown (`bao-cao/`) và mã nguồn LaTeX (`latex/chuong/`).
+* **Đảm bảo:** Trích dẫn tài liệu tham khảo chính xác theo chuẩn BibLaTeX trong `latex/tai-lieu-tham-khao.bib`, đồng bộ chuẩn hóa mã nguồn LaTeX (`latex/chuong/`) và ấn phẩm xuất bản.
 
 ### 6.3. Agent Rà soát Trước nộp (`ra-soat-truoc-nop`)
 * **Vai trò:** Kiểm định chất lượng toàn diện trước các mốc báo cáo tiến độ và trước ngày nộp khóa luận chính thức.

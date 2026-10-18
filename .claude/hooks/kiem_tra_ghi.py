@@ -39,7 +39,7 @@ CHAN = [
 # --- Hoi xac nhan ------------------------------------------------------------
 HOI = [
     (
-        re.compile(r"^bao-cao/tai-lieu-tham-khao\.bib$"),
+        re.compile(r"^latex/tai-lieu-tham-khao\.bib$"),
         "Dang ghi vao danh muc tai lieu tham khao.\n"
         "Moi muc phai la cong trinh CO THAT, da doc va kiem chung duoc, co du "
         "author, title, year va doi hoac url.\n"

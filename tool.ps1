@@ -48,6 +48,11 @@ function Invoke-Task {
     $choice = $c.Trim().ToUpper()
 
     if ($choice -eq "1") {
+        Write-Host "Dang dong bo tai lieu moi nhat vao docs/..." -ForegroundColor Cyan
+        Copy-Item -Path (Join-Path $rootDir "thu-tuc-khoa") -Destination (Join-Path $rootDir "docs\thu-tuc-khoa") -Recurse -Force -ErrorAction SilentlyContinue
+        Copy-Item -Path (Join-Path $rootDir "huong-dan") -Destination (Join-Path $rootDir "docs\huong-dan") -Recurse -Force -ErrorAction SilentlyContinue
+        Copy-Item -Path (Join-Path $rootDir "Cau-truc-toan-repo.md") -Destination (Join-Path $rootDir "docs\Cau-truc-toan-repo.md") -Force -ErrorAction SilentlyContinue
+        
         Write-Host "Khoi chay may chu Docsify xem tai lieu tren trinh duyet..." -ForegroundColor Yellow
         $docsDir = Join-Path $rootDir "docs"
         Start-Process "http://localhost:3000"

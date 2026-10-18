@@ -17,7 +17,7 @@ import sys
 from pathlib import Path
 
 GOC = Path(__file__).resolve().parents[2]
-BIB = GOC / "bao-cao" / "tai-lieu-tham-khao.bib"
+BIB = GOC / "latex" / "tai-lieu-tham-khao.bib"
 THU_MUC_TEX = GOC / "latex"
 
 # Truong bat buoc cho moi muc. Ngoai ra phai co it nhat mot trong TRUONG_CAN_MOT.
@@ -51,7 +51,7 @@ def doc_muc_bib(noi_dung: str) -> dict:
 
 def main() -> int:
     if not BIB.exists():
-        print("Khong tim thay bao-cao/tai-lieu-tham-khao.bib.")
+        print("Khong tim thay latex/tai-lieu-tham-khao.bib.")
         return 1
 
     muc_bib = doc_muc_bib(bo_chu_thich_bib(doc(BIB)))

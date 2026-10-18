@@ -9,8 +9,8 @@ Bao cao phai co:
 
 1. Voi tung tieu chi trong sau tieu chi: muc dang dat, bang chung cu the (duong dan tep),
    va viec can lam de len mot muc.
-2. Ket qua chay `python .github/scripts/kiem_tra_trich_dan.py`.
-3. So o TODO con lai trong `bao-cao/` va `latex/`.
+2. Ket qua chay `python .github/scripts/kiem_tra_trich_dan.py` hoac `node .github/scripts/kiem_tra_trich_dan.js`.
+3. So o TODO con lai trong `latex/`.
 4. Danh sach con so trong bao cao ma khong truy duoc ve `thuc-nghiem/ket-qua/`.
 5. Ba viec quan trong nhat phai lam truoc khi nop, xep theo diem thu duoc tren cong suc.
 

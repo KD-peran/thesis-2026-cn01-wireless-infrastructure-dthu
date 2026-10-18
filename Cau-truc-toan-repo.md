@@ -52,22 +52,11 @@ thesis-2026-cn01-wireless-infrastructure-dthu/
 │       ├── khoa-luan.pdf
 │       └── slide-bao-ve.pdf
 │
-├── bao-cao/                                 # BẢN THẢO BÁO CÁO KHÓA LUẬN (MARKDOWN NGUYÊN BẢN)
-│   ├── README.md
-│   ├── 00-loi-cam-doan-cam-on.md            # Cam đoan, cảm ơn, tóm tắt tiếng Việt & tiếng Anh
-│   ├── 00-loi-mo-dau.md                     # Tính cấp thiết, mục tiêu, đối tượng, phương pháp
-│   ├── 00-danh-muc-tu-viet-tat-va-thuat-ngu.md
-│   ├── 01-tong-quan-bai-toan-va-co-so-cong-nghe.md
-│   ├── 02-phan-tich-va-thiet-ke-he-thong.md
-│   ├── 03-hien-thuc-hoa-danh-gia-an-ninh-va-thuc-nghiem.md
-│   ├── 04-ket-luan.md                       # Đánh giá kết quả đạt được, hạn chế, hướng phát triển
-│   ├── 05-phu-luc.md                        # Hướng dẫn cài đặt, mã nguồn cốt lõi, log mẫu
-│   └── tai-lieu-tham-khao.bib               # Danh mục BibTeX tài liệu tham khảo chuẩn quốc tế
-│
 ├── latex/                                   # ẤN PHẨM KHÓA LUẬN CHÍNH THỨC (LATEX CHUẨN XUẤT BẢN)
 │   ├── khoa-luan.tex                        # Master LaTeX file điều phối toàn bộ báo cáo
 │   ├── slide-bao-ve.tex                     # Beamer LaTeX slide thuyết trình bảo vệ
-│   ├── chuong/                              # Modular từng chương (.tex) tương ứng với bao-cao/
+│   ├── tai-lieu-tham-khao.bib               # Danh mục BibTeX tài liệu tham khảo chuẩn quốc tế
+│   ├── chuong/                              # Modular từng chương (.tex)
 │   │   ├── 00-danh-muc-tu-viet-tat-va-thuat-ngu.tex
 │   │   ├── 00-loi-cam-doan-cam-on.tex
 │   │   ├── 00-loi-mo-dau.tex
@@ -133,8 +122,8 @@ Chỉ cần mở PowerShell tại thư mục gốc và chạy:
 .\tool.ps1
 ```
 * Bấm `[1]`: Mở máy chủ Docsify xem tài liệu Web trực quan trên trình duyệt (`http://localhost:3000`).
-* Bấm `[2]`: Biên dịch Báo cáo Khóa luận LaTeX (`khoa-luan.tex` $\rightarrow$ `latex/outputs/khoa-luan.pdf`).
-* Bấm `[3]`: Biên dịch Slide thuyết trình bảo vệ LaTeX (`slide-bao-ve.tex` $\rightarrow$ `latex/outputs/slide-bao-ve.pdf`).
+* Bấm `[2]`: Biên dịch Báo cáo Khóa luận LaTeX (`khoa-luan.tex` → `latex/outputs/khoa-luan.pdf`).
+* Bấm `[3]`: Biên dịch Slide thuyết trình bảo vệ LaTeX (`slide-bao-ve.tex` → `latex/outputs/slide-bao-ve.pdf`).
 * Bấm `[4]`: Đối chiếu kiểm tra tính toàn vẹn của trích dẫn BibTeX.
 * Bấm `[5]` hoặc `[A]`: Biên dịch toàn bộ ấn phẩm và tự động đồng bộ sang `docs/downloads/`.
 * Bấm `[O]`: Mở nhanh thư mục chứa file PDF trên Windows Explorer.

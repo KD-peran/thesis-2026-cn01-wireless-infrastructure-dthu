@@ -86,12 +86,11 @@ Với quy mô hơn 15.000 sinh viên và cán bộ giảng viên cùng sự bùn
 ```text
 thesis-2026-cn01-wireless-infrastructure-dthu/
 ├── .claude/                  # Cấu hình AI Agent, Skill, Hook, Slash Command (.md, .py)
-├── .github/                  # Copilot instructions, script kiểm tra trích dẫn, CI/CD workflow
-├── bao-cao/                  # Bản thảo Markdown các chương và file trích dẫn tai-lieu-tham-khao.bib
 ├── code/                     # File mô phỏng Cisco Packet Tracer (.pkt) và script cấu hình Switch/WLC
 ├── huong-dan/                # Kế hoạch trường ĐHĐT (KH-KLTN), quy định hình thức, rubric chấm điểm
 ├── ke-hoach/                 # Báo cáo tiến độ tuần và tool tự động xuất PDF chuẩn nhận diện DTHU
-├── latex/                    # Mã nguồn LaTeX toàn văn khóa luận và slide bảo vệ
+├── latex/                    # Mã nguồn LaTeX toàn văn khóa luận, slide bảo vệ và file .bib
+│   ├── tai-lieu-tham-khao.bib # Danh mục tài liệu tham khảo BibTeX chuẩn quốc tế
 │   ├── chuong/               # File .tex các chương 1, 2, 3, 4, mở đầu, cam đoan, phụ lục
 │   ├── images/               # Toàn bộ 53 sơ đồ mặt bằng, phổ sóng Wi-Fi Analyzer, logo DTHU
 │   ├── outputs/              # File PDF đầu ra: khoa-luan.pdf (56 trang), slide-bao-ve.pdf (23 trang)

@@ -24,7 +24,7 @@ de cuong thieu so lieu thi noi ro la thieu va hoi.
 1. `huong-dan/goi-y-de-cuong.md` - dinh huong cua giang vien huong dan. Doc truoc tien.
    Doi chieu de cuong cua sinh vien voi tep nay: lech o dau, va sinh vien co giai trinh
    duoc cho lech khong.
-2. `bao-cao/de-cuong-khoa-luan.md` - de cuong hien tai.
+2. `thu-tuc-khoa/de-cuong-khoa-luan.md` - de cuong hien tai.
 3. `README.md` - pham vi da chot.
 4. `huong-dan/rubric-cham-khoa-luan.md` - de cuong phai dan duoc toi tung tieu chi cham.
 5. `huong-dan/bien-ban/` - nhung gi da chot trong cac buoi gap truoc.

@@ -13,8 +13,8 @@ gi. **Chi doc, khong sua bat ky tep nao.**
 ## Nguon doi chieu
 
 1. `huong-dan/rubric-cham-khoa-luan.md` - thang diem chinh thuc, sau tieu chi.
-2. `bao-cao/de-cuong-khoa-luan.md` - bang chuc nang cam ket, dung de cham tieu chi 3.
-3. `bao-cao/*.md` va `latex/khoa-luan.tex` - noi dung bao cao.
+2. `thu-tuc-khoa/de-cuong-khoa-luan.md` - bang chuc nang cam ket, dung de cham tieu chi 3.
+3. `latex/chuong/*.tex` va `latex/khoa-luan.tex` - noi dung bao cao toan van.
 4. `thuc-nghiem/ket-qua/` - so lieu that.
 5. `huong-dan/bien-ban/` - phan cong va tien do, dung khi de tai co nhieu thanh vien.
 
@@ -23,8 +23,8 @@ gi. **Chi doc, khong sua bat ky tep nao.**
 1. Doc rubric truoc, khong cham theo cam tinh.
 2. Voi tung tieu chi, tim bang chung cu the trong repo. Khong co bang chung thi la chua dat,
    khong phong doan.
-3. Chay `python .github/scripts/kiem_tra_trich_dan.py` va bao ket qua.
-4. Dem o TODO con lai trong `bao-cao/` va `latex/`.
+3. Chay `python .github/scripts/kiem_tra_trich_dan.py` hoac `node .github/scripts/kiem_tra_trich_dan.js` va bao ket qua.
+4. Dem o TODO con lai trong `latex/`.
 5. Kiem tra moi con so trong bao cao co truy duoc ve `thuc-nghiem/ket-qua/` khong.
 
 ## Bao cao ket qua theo dang

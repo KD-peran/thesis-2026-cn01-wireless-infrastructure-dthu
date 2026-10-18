@@ -6,6 +6,9 @@ on:
       - main
     paths:
       - 'docs/**'
+      - 'thu-tuc-khoa/**'
+      - 'huong-dan/**'
+      - 'Cau-truc-toan-repo.md'
       - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
 
@@ -32,6 +35,12 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           enablement: true
+
+      - name: Sync documents into docs directory
+        run: |
+          cp -r thu-tuc-khoa docs/
+          cp -r huong-dan docs/
+          cp Cau-truc-toan-repo.md docs/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

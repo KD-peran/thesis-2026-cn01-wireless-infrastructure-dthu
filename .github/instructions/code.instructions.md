@@ -30,7 +30,7 @@ Mô tả nói việc gì đã thay đổi, không nói tệp nào đã sửa. Tr
 
 ## Kiểm thử
 
-Mỗi chức năng bắt buộc trong bảng cam kết ở `bao-cao/de-cuong-khoa-luan.md` phải có ít nhất
+Mỗi chức năng bắt buộc trong bảng cam kết ở `thu-tuc-khoa/de-cuong-khoa-luan.md` phải có ít nhất
 một kiểm thử tự động cho luồng chính. Rubric chấm điều này ở tiêu chí 3.
 
 ## Tính tái lập

@@ -42,6 +42,6 @@ Dữ liệu thật của doanh nghiệp phải được ẩn danh trước khi d
 
 ## Chốt cách đo trước khi cài đặt
 
-Bảng tiêu chí đánh giá ở mục 8 của `bao-cao/de-cuong-khoa-luan.md` phải điền xong trước khi
+Bảng tiêu chí đánh giá ở mục 8 của `thu-tuc-khoa/de-cuong-khoa-luan.md` phải điền xong trước khi
 bắt đầu cài đặt. Chốt tiêu chí sau khi đã thấy kết quả là tự lừa mình, và hội đồng sẽ hỏi
 ngay điểm này.

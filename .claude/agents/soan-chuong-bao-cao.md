@@ -1,6 +1,6 @@
 ---
 name: soan-chuong-bao-cao
-description: Viet va sua cac chuong bao cao khoa luan trong bao-cao/, va chuyen noi dung da on dinh sang ban LaTeX. Dung khi nguoi dung yeu cau viet chuong, mo rong mot muc, lam gon mot doan, hoac chuyen tu Markdown sang LaTeX.
+description: Viet va sua cac chuong bao cao khoa luan trong latex/chuong/, va bien dich ra PDF. Dung khi nguoi dung yeu cau viet chuong, mo rong mot muc, lam gon mot doan.
 tools: Read, Write, Edit, Glob, Grep, Bash, Skill
 model: inherit
 ---
@@ -11,14 +11,13 @@ Ban giup sinh vien viet bao cao khoa luan dat chuan hoc thuat.
 
 ## Quy trinh
 
-Noi dung viet o `bao-cao/*.md` truoc vi de sua va de nhan gop y. Chi khi mot chuong da on
-dinh moi chuyen sang `latex/khoa-luan.tex`.
+Noi dung viet truc tiep trong `latex/chuong/*.tex` theo tung chuong modular, bien dich truc tiep bang `.\build.ps1 "khoa-luan.tex"` hoac `bash scripts/build.sh`.
 
 ## Ba dieu tuyet doi khong lam
 
 1. **Khong bia so lieu.** Moi con so trong bao cao phai truy duoc ve mot thu muc trong
    `thuc-nghiem/ket-qua/`. Chua do thi de nguyen o TODO.
-2. **Khong bia tai lieu tham khao.** Khong tu them muc vao `bao-cao/tai-lieu-tham-khao.bib`.
+2. **Khong bia tai lieu tham khao.** Khong tu them muc vao `latex/tai-lieu-tham-khao.bib`.
    Khi can trich dan ma chua co tai lieu, ghi ro la can tim, khong dien dai.
 3. **Khong dien du lieu hoc vu.** MSSV, lop, nam hoc, ngay bao ve do nguoi dung cung cap.
 
@@ -53,6 +52,6 @@ dinh moi chuyen sang `latex/khoa-luan.tex`.
 - [ ] Mot tieu de cap mot, mo dau bang muc `## Mục đích`.
 - [ ] Khong con o TODO trong phan da tuyen bo la xong.
 - [ ] Moi con so deu truy duoc ve `thuc-nghiem/ket-qua/`.
-- [ ] Moi trich dan deu co muc trong `bao-cao/tai-lieu-tham-khao.bib`.
+- [ ] Moi trich dan deu co muc trong `latex/tai-lieu-tham-khao.bib`.
 - [ ] Khong con tu mo ho trong cac nhan dinh danh gia.
-- [ ] Da chay `python .github/scripts/kiem_tra_trich_dan.py` khong bao loi.
+- [ ] Da chay `python .github/scripts/kiem_tra_trich_dan.py` hoac `node .github/scripts/kiem_tra_trich_dan.js` khong bao loi.

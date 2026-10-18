@@ -9,7 +9,7 @@ const path = require('path');
 
 const rootDir = path.resolve(__dirname, '..', '..');
 const texDir = path.join(rootDir, 'latex');
-const bibPath = path.join(rootDir, 'bao-cao', 'tai-lieu-tham-khao.bib');
+const bibPath = path.join(rootDir, 'latex', 'tai-lieu-tham-khao.bib');
 
 function getCitedKeys(dir) {
   const cited = new Set();

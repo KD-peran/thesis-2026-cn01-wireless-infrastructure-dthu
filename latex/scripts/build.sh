@@ -29,7 +29,7 @@ for tex in "$@"; do
   # nhung van build duoc PDF, nen o day chi canh bao chu khong dung ca script.
   if [ -f "$base.bcf" ]; then
     if ! biber "$base"; then
-      echo "    [canh bao] biber bao loi. Thuong la do bao-cao/tai-lieu-tham-khao.bib" >&2
+      echo "    [canh bao] biber bao loi. Thuong la do latex/tai-lieu-tham-khao.bib" >&2
       echo "    chua co muc nao. Danh muc tai lieu tham khao se trong trong PDF." >&2
     fi
   fi

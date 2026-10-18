@@ -19,10 +19,9 @@ Sinh viên thực hiện: **Nguyễn Thị Kỳ Duyên** | Giảng viên hướn
 
 1. **Khi có số liệu đo kiểm mới:**
    - Cập nhật số liệu thô vào `thuc-nghiem/khao-sat-wifi/`.
-   - Cập nhật bảng tổng hợp trong chương báo cáo `bao-cao/02-khao-sat-va-danh-gia-hien-trang.md`.
-   - Đồng bộ số liệu vào file LaTeX `latex/chuong/02-khao-sat-va-danh-gia-hien-trang-mang-dthu.tex`.
+   - Cập nhật bảng tổng hợp trong chương báo cáo `latex/chuong/02-khao-sat-va-danh-gia-hien-trang-mang-dthu.tex`.
 2. **Khi cập nhật tài liệu tham khảo:**
-   - Thêm bản ghi BibTeX đầy đủ (tác giả, tên tài liệu, năm xuất bản, tổ chức, DOI/URL nếu có) vào `bao-cao/tai-lieu-tham-khao.bib`.
+   - Thêm bản ghi BibTeX đầy đủ (tác giả, tên tài liệu, năm xuất bản, tổ chức, DOI/URL nếu có) vào `latex/tai-lieu-tham-khao.bib`.
    - Kiểm tra trích dẫn thông qua script:
      ```powershell
      python .github/scripts/kiem_tra_trich_dan.py

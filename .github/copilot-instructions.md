@@ -8,7 +8,7 @@ Tháp. Repo chứa cả tài liệu và mã nguồn. Người dùng chính là s
 1. **Không sinh số liệu.** Không tự điền con số vào bảng kết quả, bảng chỉ số, hay phần
    đánh giá. Số liệu phải đến từ thực nghiệm có thật, ghi trong `thuc-nghiem/ket-qua/`.
    Chỗ chưa có số thì để nguyên ô TODO.
-2. **Không sinh tài liệu tham khảo.** Không tự thêm mục vào `bao-cao/tai-lieu-tham-khao.bib`,
+2. **Không sinh tài liệu tham khảo.** Không tự thêm mục vào `latex/tai-lieu-tham-khao.bib`,
    không bịa tên tác giả, năm, DOI. Một trích dẫn sai làm hỏng cả tiêu chí trình bày khi chấm,
    và là lỗi liêm chính học thuật.
 3. **Không điền dữ liệu học vụ.** Mã số sinh viên, lớp, năm học, ngày bảo vệ phải do người
@@ -18,11 +18,12 @@ Tháp. Repo chứa cả tài liệu và mã nguồn. Người dùng chính là s
 
 | Thư mục | Nội dung |
 | --- | --- |
-| `bao-cao/` | Đề cương, sáu chương báo cáo, danh mục tài liệu tham khảo |
-| `latex/` | Bản LaTeX báo cáo và slide bảo vệ |
-| `code/` | Mã nguồn hệ thống |
-| `thuc-nghiem/` | Dữ liệu và kết quả thực nghiệm |
+| `latex/` | Bản LaTeX báo cáo toàn văn (`khoa-luan.tex`), slide bảo vệ (`slide-bao-ve.tex`) và tài liệu tham khảo |
+| `code/` | Mã nguồn cấu hình WLC, RADIUS và kịch bản mô phỏng mạng |
+| `thuc-nghiem/` | Dữ liệu và kết quả thực nghiệm đo kiểm sóng Wi-Fi |
+| `thu-tuc-khoa/` | Hồ sơ đề tài, kế hoạch thực hiện, đề cương khóa luận |
 | `huong-dan/` | Rubric, phiếu đánh giá, biên bản tuần |
+| `docs/` | Website tài liệu tra cứu trực quan (Docsify) |
 
 Mỗi thư mục có `README.md` nói rõ đặt gì vào đó và không đặt gì vào đó.
 
@@ -43,7 +44,6 @@ Quy tắc chi tiết nằm trong `.github/instructions/`, Copilot tự nạp the
 
 | Tệp | Áp dụng cho |
 | --- | --- |
-| `bao-cao.instructions.md` | `bao-cao/**/*.md` |
 | `latex.instructions.md` | `latex/**/*.tex` |
 | `code.instructions.md` | `code/**` |
 | `thuc-nghiem.instructions.md` | `thuc-nghiem/**` |

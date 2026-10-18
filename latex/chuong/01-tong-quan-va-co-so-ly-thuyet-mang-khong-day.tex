@@ -5,7 +5,7 @@
 
 \subsection{Khái niệm và đặc điểm của WLAN}
 
-Mạng cục bộ không dây (Wireless Local Area Network -- WLAN) là hệ thống mạng máy tính cho phép hai hay nhiều thiết bị kết nối và truyền thông tin với nhau thông qua môi trường sóng vô tuyến (Radio Frequency -- RF) thay vì sử dụng cáp truyền dẫn vật lý truyền thống \cite{kurose2021computer}. Chuẩn hóa quốc tế của mạng WLAN được quản lý bởi Viện Kỹ sư Điện và Điện tử (IEEE) thông qua bộ tiêu chuẩn IEEE 802.11, thường được biết đến trên thị trường với thương hiệu Wi-Fi.
+Mạng cục bộ không dây (Wireless Local Area Network -- WLAN) là hệ thống mạng máy tính cho phép hai hay nhiều thiết bị kết nối và truyền thông tin với nhau thông qua môi trường sóng vô tuyến (Radio Frequency -- RF) thay vì sử dụng cáp truyền dẫn vật lý truyền thống \cite{kurose2021computer}. Chuẩn hóa quốc tế của mạng WLAN được quản lý bởi Viện Kỹ sư Điện và Điện tử (IEEE) thông qua bộ tiêu chuẩn cơ sở IEEE 802.11 \cite{ieee80211_2020}, thường được biết đến trên thị trường với thương hiệu Wi-Fi.
 
 So với mạng có dây truyền thống (Ethernet IEEE 802.3), mạng WLAN sở hữu các đặc tính kỹ thuật nổi bật:
 \begin{itemize}
@@ -17,7 +17,7 @@ So với mạng có dây truyền thống (Ethernet IEEE 802.3), mạng WLAN s�
 
 \subsection{Phân loại mạng không dây theo phạm vi phủ sóng}
 
-Trong hệ thống viễn thông và mạng máy tính, mạng không dây được phân cấp theo bán kính hoạt động vật lý thành 4 nhóm chính:
+Trong hệ thống viễn thông và mạng máy tính, mạng không dây được phân cấp theo bán kính hoạt động vật lý thành 4 nhóm chính \cite{stallings2005wireless}:
 \begin{enumerate}
     \item \textbf{WPAN (Wireless Personal Area Network):} Mạng cá nhân không dây có bán kính bao phủ dưới 10m, điển hình là các chuẩn Bluetooth (IEEE 802.15.1) và ZigBee (IEEE 802.15.4), phục vụ kết nối thiết bị ngoại vi và cảm biến tầm gần.
     \item \textbf{WLAN (Wireless Local Area Network):} Mạng cục bộ không dây có phạm vi phủ sóng từ vài chục mét đến hàng trăm mét, hoạt động chủ yếu dựa trên bộ tiêu chuẩn IEEE 802.11, thích hợp cho khuôn viên trường học, doanh nghiệp và tòa nhà.
@@ -174,7 +174,7 @@ Bảng \ref{tab:wifi_evolution} tóm tắt tiến trình phát triển của cá
 
 \subsection{Các công nghệ đột phá của chuẩn Wi-Fi 6 (IEEE 802.11ax)}
 
-Chuẩn IEEE 802.11ax (Wi-Fi 6) được thiết kế đặc thù không chỉ nhằm tăng tốc độ đỉnh (Peak Throughput) mà mục tiêu trọng tâm là cải thiện hiệu quả sử dụng phổ tần trong môi trường có mật độ thiết bị cực cao (High Density -- HD) như giảng đường đại học \cite{khorov2019tutorial}:
+Chuẩn IEEE 802.11ax (Wi-Fi 6) \cite{ieee80211ax_2021} được thiết kế đặc thù không chỉ nhằm tăng tốc độ đỉnh (Peak Throughput) mà mục tiêu trọng tâm là cải thiện hiệu quả sử dụng phổ tần trong môi trường có mật độ thiết bị cực cao (High Density -- HD) như giảng đường đại học \cite{khorov2019tutorial}:
 
 \begin{enumerate}
     \item \textbf{Kỹ thuật đa truy nhập phân chia theo tần số trực giao (OFDMA):} Đây là công nghệ cốt lõi mượn từ mạng di động 4G/5G. Thay vì cho phép một người dùng duy nhất chiếm dụng toàn bộ kênh truyền 20 MHz hoặc 40 MHz tại một thời điểm, OFDMA chia nhỏ kênh sóng thành các khối tần số con gọi là \textbf{Resource Units (RU)}. Một khung truyền vô tuyến có thể phục vụ đồng thời lên tới hàng chục người dùng khác nhau trong cùng một thời điểm, triệt tiêu tình trạng nghẽn hàng đợi đối với các gói tin nhỏ.
@@ -197,7 +197,7 @@ Kiến trúc mạng không dây hiện đại chuyển dịch hoàn toàn sang m
 
 \section{Cơ chế chuyển vùng nhanh (Fast Roaming: IEEE 802.11r/k/v)}
 
-Chuyển vùng (Roaming) là quá trình thiết bị di động ngắt kết nối với AP hiện tại và thiết lập liên kết mới với một AP lân cận có cường độ sóng mạnh hơn. Trong các mạng Wi-Fi bảo mật truyền thống (WPA2-Enterprise), quá trình roaming đòi hỏi trao đổi lại trọn vẹn quy trình bắt tay 802.1X với máy chủ RADIUS, gây độ trễ từ 500 ms đến 2.000 ms, dẫn đến rớt kết nối cuộc gọi thoại, video hoặc ứng dụng thi trực tuyến.
+Chuyển vùng (Roaming) là quá trình thiết bị di động ngắt kết nối với AP hiện tại và thiết lập liên kết mới với một AP lân cận có cường độ sóng mạnh hơn. Trong các mạng Wi-Fi bảo mật truyền thống (WPA2-Enterprise) đối mặt với các thách thức an ninh và tấn công giả mạo vô tuyến \cite{mishra2019security}, quá trình roaming đòi hỏi trao đổi lại trọn vẹn quy trình bắt tay 802.1X với máy chủ RADIUS, gây độ trễ từ 500 ms đến 2.000 ms, dẫn đến rớt kết nối cuộc gọi thoại, video hoặc ứng dụng thi trực tuyến.
 
 Hệ thống mạng không dây hiện đại giải quyết bài toán này thông qua bộ ba tiêu chuẩn:
 \begin{itemize}

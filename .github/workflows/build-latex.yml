@@ -6,7 +6,6 @@ on:
       - main
     paths:
       - 'latex/**'
-      - 'bao-cao/**'
       - '.github/workflows/build-latex.yml'
   pull_request:
     branches:

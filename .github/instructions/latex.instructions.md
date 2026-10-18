@@ -24,16 +24,13 @@ cảnh báo rồi build tiếp. Đừng sửa script để bỏ qua lỗi biber 
 
 ## Quy trình
 
-Nội dung chữ soạn trước ở `bao-cao/` dạng Markdown. Chỉ khi một chương đã ổn định mới
-chuyển sang đây. Không viết nội dung mới trực tiếp vào tệp `.tex`.
+Nội dung báo cáo được tổ chức mô-đun hóa trong thư mục `latex/chuong/` theo từng chương (`00-loi-mo-dau.tex`, `01-...`, v.v.). Mọi chỉnh sửa nội dung học thuật được thực hiện trực tiếp tại đây.
 
 ## Build
 
-Chạy từ trong thư mục `latex/`:
-
-```bash
-bash scripts/build.sh khoa-luan.tex slide-bao-ve.tex
-```
+Chạy lệnh build báo cáo và slide:
+- Trên Windows PowerShell: `.\build.ps1 "khoa-luan.tex"` hoặc `.\build.ps1 "slide-bao-ve.tex"`
+- Trên Linux/CI: `bash latex/scripts/build.sh khoa-luan.tex slide-bao-ve.tex`
 
 ## Hình ảnh
 
@@ -43,7 +40,7 @@ bash scripts/build.sh khoa-luan.tex slide-bao-ve.tex
 
 ## Trích dẫn
 
-Mọi khóa trong `\cite` phải có mục tương ứng trong `bao-cao/tai-lieu-tham-khao.bib`. Không
-tự thêm mục vào tệp đó. Kiểm tra bằng `python .github/scripts/kiem_tra_trich_dan.py`.
+Mọi khóa trong `\cite` phải có mục tương ứng trong `latex/tai-lieu-tham-khao.bib`. Không
+tự thêm mục vào tệp đó. Kiểm tra bằng `python .github/scripts/kiem_tra_trich_dan.py` hoặc `node .github/scripts/kiem_tra_trich_dan.js`.
 
 Chi tiết đầy đủ trong `latex/README.md`.
