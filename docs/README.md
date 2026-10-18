@@ -117,12 +117,12 @@ graph TD
     EdgeFW --- CoreSwitch2
 
     %% Core Interconnect
-    CoreSwitch1 <=== "Core Interconnect Link (10/40 Gbps)" ===> CoreSwitch2
+    CoreSwitch1 <-->|"Core Interconnect Link (10/40 Gbps)"| CoreSwitch2
 
     %% WLC Uplinks & Redundancy Link
     CoreSwitch1 --- WLC_Primary
     CoreSwitch2 --- WLC_Backup
-    WLC_Primary <-. "HA Keepalive & Sync (Heartbeat)" .-> WLC_Backup
+    WLC_Primary -.-|"HA Keepalive & Sync (Heartbeat)"| WLC_Backup
 
     %% Dual-Homing Servers
     RadiusServer --- CoreSwitch1
@@ -155,8 +155,8 @@ graph TD
     %% ==========================================
     %% ĐƯỜNG HẦM CAPWAP LOGIC (OVERLAY TUNNEL)
     %% ==========================================
-    AP_A1 -. "CAPWAP Control & Data Tunnel" .-> WLC_Primary
-    AP_Lib -. "CAPWAP Control & Data Tunnel" .-> WLC_Primary
+    AP_A1 -.->|"CAPWAP Control & Data Tunnel"| WLC_Primary
+    AP_Lib -.->|"CAPWAP Control & Data Tunnel"| WLC_Primary
 ```
 
 ---
