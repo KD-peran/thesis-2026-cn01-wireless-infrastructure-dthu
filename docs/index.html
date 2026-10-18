@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Khóa Luận Tốt Nghiệp - Thiết Kế Kiến Trúc Tổng Thể Hạ Tầng Mạng Không Dây DTHU</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Docsify Vue Theme -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <!-- KaTeX Math Styling -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+  <style>
+    :root {
+      --theme-color: #0284c7;
+      --sidebar-width: 300px;
+      --text-color: #1e293b;
+      --bg-color: #f8fafc;
+      --sidebar-bg: #ffffff;
+      --sidebar-border: #e2e8f0;
+    }
+    body.dark-mode {
+      --text-color: #f1f5f9;
+      --bg-color: #0f172a;
+      --sidebar-bg: #1e293b;
+      --sidebar-border: #334155;
+      background-color: #0f172a !important;
+      color: #f1f5f9 !important;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .sidebar {
+      background-color: var(--sidebar-bg);
+      border-right: 1px solid var(--sidebar-border);
+    }
+    body.dark-mode .sidebar {
+      background-color: #1e293b;
+      border-right: 1px solid #334155;
+      color: #cbd5e1;
+    }
+    body.dark-mode .sidebar a {
+      color: #94a3b8;
+    }
+    body.dark-mode .sidebar a:hover,
+    body.dark-mode .sidebar li.active > a {
+      color: #38bdf8;
+      font-weight: 600;
+    }
+    body.dark-mode .markdown-section h1,
+    body.dark-mode .markdown-section h2,
+    body.dark-mode .markdown-section h3,
+    body.dark-mode .markdown-section h4 {
+      color: #f8fafc;
+    }
+    body.dark-mode .markdown-section table tr {
+      background-color: #1e293b;
+      border-top: 1px solid #334155;
+    }
+    body.dark-mode .markdown-section table tr:nth-child(2n) {
+      background-color: #0f172a;
+    }
+    body.dark-mode .markdown-section table th,
+    body.dark-mode .markdown-section table td {
+      border: 1px solid #334155;
+    }
+    code, pre {
+      font-family: 'JetBrains Mono', monospace !important;
+    }
+    .markdown-section pre > code {
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+    /* Dark mode toggle button */
+    .theme-toggle-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .theme-toggle-btn:hover {
+      transform: scale(1.1) rotate(15deg);
+      background: #0369a1;
+    }
+    /* Banner header badges */
+    .badge-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 12px 0 20px 0;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+    body.dark-mode .badge {
+      background: #0369a1;
+      color: #e0f2fe;
+    }
+    /* Mermaid diagram container */
+    .mermaid {
+      background: #ffffff;
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      margin: 16px 0;
+      display: flex;
+      justify-content: center;
+    }
+    body.dark-mode .mermaid {
+      background: #1e293b;
+      border: 1px solid #334155;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">Đang tải tài liệu nghiên cứu khóa luận tốt nghiệp...</div>
+  <button class="theme-toggle-btn" id="themeToggle" title="Chuyển chế độ Sáng/Tối">🌓</button>
+
+  <script>
+    window.$docsify = {
+      name: 'KLTN DTHU - WLAN 2026',
+      repo: '',
+      loadSidebar: true,
+      subMaxLevel: 3,
+      auto2top: true,
+      homepage: 'README.md',
+      search: {
+        placeholder: 'Tìm kiếm nội dung, tuần, từ khóa...',
+        noData: 'Không tìm thấy kết quả phù hợp',
+        depth: 4
+      },
+      copyCode: {
+        buttonText: 'Sao chép',
+        errorText: 'Lỗi',
+        successText: 'Đã chép'
+      },
+      pagination: {
+        previousText: 'Bài trước',
+        nextText: 'Bài tiếp theo'
+      },
+      markdown: {
+        renderer: {
+          code: function(code, lang) {
+            if (lang === "mermaid") {
+              return ('<div class="mermaid">' + code + "</div>");
+            }
+            return this.origin.code.apply(this, arguments);
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Docsify Core -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <!-- Plugins: Search, Copy-code, Zoom-image, Pagination -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <!-- Mermaid & KaTeX -->
+  <script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script>
+
+  <script>
+    mermaid.initialize({ startOnLoad: false, theme: 'default' });
+    // Dark mode logic with persistence
+    const toggleBtn = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.body.classList.add('dark-mode');
+    }
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

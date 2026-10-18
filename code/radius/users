@@ -1,0 +1,16 @@
+# ==============================================================
+# FREERADIUS CONFIGURATION: users
+# Khai báo nhóm người dùng và thuộc tính phân quyền VLAN
+# ==============================================================
+
+# 1. Nhóm Cán bộ Giảng viên (VLAN 10)
+DEFAULT Group == "dthu_staff", Auth-Type := EAP
+    Tunnel-Type = 13,
+    Tunnel-Medium-Type = 6,
+    Tunnel-Private-Group-Id = "10"
+
+# 2. Nhóm Toàn thể Sinh viên DTHU (VLAN 20)
+DEFAULT Group == "dthu_student", Auth-Type := EAP
+    Tunnel-Type = 13,
+    Tunnel-Medium-Type = 6,
+    Tunnel-Private-Group-Id = "20"

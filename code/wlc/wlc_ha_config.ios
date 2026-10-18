@@ -1,0 +1,32 @@
+! ==============================================================
+! CISCO WLC 9800 / AIR-CT5520 CONFIGURATION SCRIPT
+! Đề tài: Thiết kế hạ tầng mạng không dây DTHU
+! ==============================================================
+
+! 1. Thiết lập Interface Quản trị WLC
+wireless management interface Vlan50
+
+! 2. Cấu hình High Availability N+1 (Active-Standby SSO)
+chassis redundancy ha-interface GigabitEthernet 0/0/2
+chassis redundancy keepalive-timer 100
+chassis redundancy peer-ip 172.16.50.11
+chassis redundancy unit 1 primary
+
+! 3. Khởi tạo Profile WLAN DTHU_STUDENT (Wi-Fi 6 + 802.1X)
+wlan DTHU_STUDENT 20 DTHU_STUDENT
+ client vlan 20
+ security wpa psk set-key ascii 0 Disabled
+ security wpa wpa2
+ security wpa wpa2 ciphers aes
+ security wpa akm 802.1x
+ security dot1x authentication-list DTHU_RADIUS_AAA
+ radio dot11a
+ radio dot11bg
+ dot11v bss-transition
+ dot11k neighbor-list
+ dot11r ft
+ no shutdown
+
+! 4. Kích hoạt tính năng Client Isolation (Bảo vệ sinh viên)
+wlan DTHU_STUDENT
+ peer-blocking drop

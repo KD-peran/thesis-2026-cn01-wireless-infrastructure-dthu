@@ -1,0 +1,52 @@
+name: Build LaTeX Thesis & Slides
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'latex/**'
+      - 'bao-cao/**'
+      - '.github/workflows/build-latex.yml'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: texlive/texlive:latest-full
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python for Citation Verification
+        run: |
+          python3 .github/scripts/kiem_tra_trich_dan.py || true
+
+      - name: Build Thesis (khoa-luan.tex)
+        working-directory: latex
+        run: |
+          mkdir -p outputs
+          pdflatex -interaction=nonstopmode -halt-on-error khoa-luan.tex
+          biber khoa-luan || true
+          pdflatex -interaction=nonstopmode -halt-on-error khoa-luan.tex
+          pdflatex -interaction=nonstopmode -halt-on-error khoa-luan.tex
+          mv khoa-luan.pdf outputs/
+
+      - name: Build Defense Slides (slide-bao-ve.tex)
+        working-directory: latex
+        run: |
+          pdflatex -interaction=nonstopmode -halt-on-error slide-bao-ve.tex
+          pdflatex -interaction=nonstopmode -halt-on-error slide-bao-ve.tex
+          mv slide-bao-ve.pdf outputs/
+
+      - name: Upload PDF Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: thesis-pdf-outputs
+          path: latex/outputs/*.pdf
+          retention-days: 30
