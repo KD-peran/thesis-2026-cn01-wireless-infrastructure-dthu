@@ -56,3 +56,63 @@
 | **Tỷ lệ mất gói tin (Packet Loss)** | 7% – 12% trong giờ cao điểm | **$< 2\%$** (Đảm bảo gọi Teams/Zoom) | **Triệt tiêu gián đoạn** |
 | **Phương thức xác thực** | Mật khẩu dùng chung WPA2-PSK | **802.1X/EAP** với FreeRADIUS/LDAP | **Định danh 100%** |
 | **Dự phòng hệ thống lõi** | Không có dự phòng (SPOF WLC & Core) | **Cụm WLC N+1 & Core Dual-Homing** | **Sẵn sàng 99.99%** |
+
+---
+
+## 5. Danh Mục Sơ Đồ Mặt Bằng & Biểu Đồ Đo Kiểm Thực Địa (51 Hình Ảnh)
+
+Dưới đây là danh mục toàn bộ 51 sơ đồ vị trí lắp đặt Access Point tại các khối công trình và biểu đồ phân tích sóng vô tuyến thực tế tại Trường Đại học Đồng Tháp được số hóa trong Chương 2 của báo cáo khóa luận:
+
+| Ký hiệu hình | Tên sơ đồ / Biểu đồ khảo sát thực địa | Khu vực / Tầng lầu | Tệp ảnh lưu trữ |
+| :---: | :---|:---|:---:|
+| **Hình 2.1** | Sơ đồ tổng thể khuôn viên Trường Đại học Đồng Tháp | Toàn trường | `dthu_fig-001.png` |
+| **Hình 2.2** | Sơ đồ mạng tổng thể tại Trường Đại học Đồng Tháp | Toàn trường (Logic) | `dthu_fig-002.png` |
+| **Hình 2.3** | Mô hình mô phỏng hạ tầng mạng trên Cisco Packet Tracer | Mô phỏng | `dthu_fig-003.png` |
+| **Hình 2.4** | Sơ đồ vị trí lắp đặt Access Point tại Tòa C2 | Khối Giảng đường C2 | `dthu_fig-004.png` |
+| **Hình 2.5** | Sơ đồ vị trí lắp đặt Access Point tại Tòa A1 | Khối Giảng đường A1 | `dthu_fig-005.png` |
+| **Hình 2.6** | Sơ đồ vị trí lắp đặt Access Point tại Tòa A2 | Khối Phòng máy A2 | `dthu_fig-006.png` |
+| **Hình 2.7** | Sơ đồ vị trí lắp đặt Access Point tại Tòa A7 | Khối Thực hành A7 | `dthu_fig-007.png` |
+| **Hình 2.8** | Sơ đồ vị trí lắp đặt Access Point tại Tòa A8 | Khối Thí nghiệm A8 | `dthu_fig-008.png` |
+| **Hình 2.9** | Sơ đồ vị trí lắp đặt Access Point tại Tòa A9 | Khối Thí nghiệm A9 | `dthu_fig-009.png` |
+| **Hình 2.10** | Sơ đồ vị trí lắp đặt Access Point tại Tòa A4 | Khối Hành chính A4 | `dthu_fig-010.png` |
+| **Hình 2.11** | Sơ đồ vị trí lắp đặt Access Point tại Tòa B1 | Khối Văn phòng B1 | `dthu_fig-011.png` |
+| **Hình 2.12** | Sơ đồ vị trí lắp đặt Access Point tại Tòa B2 | Khối Văn phòng B2 | `dthu_fig-012.png` |
+| **Hình 2.13** | Sơ đồ vị trí lắp đặt Access Point tại Tòa B3 | Khối Hành chính B3 | `dthu_fig-013.png` |
+| **Hình 2.14** | Sơ đồ vị trí lắp đặt Access Point tại Tòa B5 | Căn tin mở B5 | `dthu_fig-014.png` |
+| **Hình 2.15** | Sơ đồ vị trí lắp đặt Access Point tại KTX B6 | Ký túc xá B6 | `dthu_fig-015.png` |
+| **Hình 2.16** | Sơ đồ vị trí lắp đặt Access Point tại T1 Tòa B4 | Tầng 1 Tòa B4 | `dthu_fig-016.png` |
+| **Hình 2.17** | Sơ đồ vị trí lắp đặt Access Point tại T2 Tòa B4 | Tầng 2 Tòa B4 | `dthu_fig-017.png` |
+| **Hình 2.18** | Sơ đồ vị trí lắp đặt Access Point tại T3 Tòa B4 | Tầng 3 Tòa B4 | `dthu_fig-018.png` |
+| **Hình 2.19** | Sơ đồ vị trí lắp đặt Access Point tại Tầng Trệt H1 | Tầng Trệt H1 | `dthu_fig-019.png` |
+| **Hình 2.20** | Sơ đồ vị trí lắp đặt Access Point tại T1H1 | Tầng 1 Tòa H1 | `dthu_fig-020.png` |
+| **Hình 2.21** | Sơ đồ vị trí lắp đặt Access Point tại T2H1 | Tầng 2 Tòa H1 | `dthu_fig-021.png` |
+| **Hình 2.22** | Sơ đồ vị trí lắp đặt Access Point tại T3H1 | Tầng 3 Tòa H1 | `dthu_fig-022.png` |
+| **Hình 2.23** | Sơ đồ vị trí lắp đặt Access Point tại T4H1 | Tầng 4 Tòa H1 | `dthu_fig-023.png` |
+| **Hình 2.24** | Sơ đồ vị trí lắp đặt Access Point tại T1H2 | Tầng 1 Tòa H2 | `dthu_fig-024.png` |
+| **Hình 2.25** | Sơ đồ vị trí lắp đặt Access Point tại T2H2 | Tầng 2 Tòa H2 | `dthu_fig-025.png` |
+| **Hình 2.26** | Sơ đồ vị trí lắp đặt Access Point tại T3H2 | Tầng 3 Tòa H2 | `dthu_fig-026.png` |
+| **Hình 2.27** | Sơ đồ vị trí lắp đặt Access Point tại Tòa T4H2 | Tầng 4 Tòa H2 | `dthu_fig-027.png` |
+| **Hình 2.28** | Sơ đồ vị trí lắp đặt Access Point tại Tòa T5H2 | Tầng 5 Tòa H2 | `dthu_fig-028.png` |
+| **Hình 2.29** | Sơ đồ vị trí lắp đặt Access Point tại T1H3 | Tầng 1 Tòa H3 | `dthu_fig-029.png` |
+| **Hình 2.30** | Sơ đồ vị trí lắp đặt Access Point tại T2H3 | Tầng 2 Tòa H3 | `dthu_fig-030.png` |
+| **Hình 2.31** | Sơ đồ vị trí lắp đặt Access Point tại T3H3 | Tầng 3 Tòa H3 | `dthu_fig-031.png` |
+| **Hình 2.32** | Sơ đồ vị trí lắp đặt Access Point tại T4H3 | Tầng 4 Tòa H3 | `dthu_fig-032.png` |
+| **Hình 2.33** | Sơ đồ vị trí lắp đặt Access Point tại T5H3 | Tầng 5 Tòa H3 | `dthu_fig-033.png` |
+| **Hình 2.34** | Sơ đồ vị trí lắp đặt Access Point tại T6H3 | Tầng 6 Tòa H3 | `dthu_fig-034.png` |
+| **Hình 2.35** | Sơ đồ vị trí lắp đặt Access Point tại T7H3 | Tầng 7 Tòa H3 | `dthu_fig-035.png` |
+| **Hình 2.36** | Sơ đồ vị trí lắp đặt Access Point tại T8H3 | Tầng 8 Tòa H3 | `dthu_fig-036.png` |
+| **Hình 2.37** | Sơ đồ vị trí lắp đặt Access Point tại T9H3 | Tầng 9 Tòa H3 | `dthu_fig-037.png` |
+| **Hình 2.38** | Sơ đồ vị trí lắp đặt Access Point tại Tầng 1 Thư viện | Tầng 1 Thư viện | `dthu_fig-038.png` |
+| **Hình 2.39** | Sơ đồ vị trí lắp đặt Access Point tại Tầng 2 Thư viện | Tầng 2 Thư viện | `dthu_fig-039.png` |
+| **Hình 2.40** | Sơ đồ vị trí lắp đặt Access Point tại GĐ1 | Giảng đường lớn 1 | `dthu_fig-040.png` |
+| **Hình 2.41** | Sơ đồ vị trí lắp đặt Access Point tại Tầng 1 GDQP | Tầng 1 GDQP | `dthu_fig-041.png` |
+| **Hình 2.42** | Sơ đồ vị trí lắp đặt Access Point tại Tầng 2 GDQP | Tầng 2 GDQP | `dthu_fig-042.png` |
+| **Hình 2.43** | Sơ đồ vị trí lắp đặt Access Point tại Tòa T123 | Tòa T123 | `dthu_fig-043.png` |
+| **Hình 2.44** | Sơ đồ vị trí lắp đặt Access Point tại Tầng 1 Tòa C1 | Tầng 1 Tòa C1 | `dthu_fig-044.png` |
+| **Hình 2.45** | Sơ đồ vị trí lắp đặt Access Point tại Tầng 2 Tòa C1 | Tầng 2 Tòa C1 | `dthu_fig-045.png` |
+| **Hình 2.46** | Sơ đồ vị trí lắp đặt Access Point tại Tầng 3 Tòa C1 | Tầng 3 Tòa C1 | `dthu_fig-046.png` |
+| **Hình 2.47** | Sơ đồ vị trí lắp đặt Access Point tại Tầng 4 Tòa C1 | Tầng 4 Tòa C1 | `dthu_fig-047.png` |
+| **Hình 2.48** | Sơ đồ vị trí lắp đặt Access Point tại Tầng 5 Tòa C1 | Tầng 5 Tòa C1 | `dthu_fig-048.png` |
+| **Hình 2.49** | Biểu đồ quét sóng Wi-Fi thực tế tại Tòa A1 | Phổ sóng A1 (Nhiễu Kênh 6) | `dthu_fig-050.png` |
+| **Hình 2.50** | Biểu đồ quét sóng Wi-Fi thực tế tại Tòa B3 | Phổ sóng B3 (Rogue AP) | `dthu_fig-051.png` |
+| **Hình 2.51** | Biểu đồ quét sóng Wi-Fi thực tế tại Tòa B5 | Phổ sóng B5 (Hỗn loạn 2.4GHz) | `dthu_fig-052.png` |
